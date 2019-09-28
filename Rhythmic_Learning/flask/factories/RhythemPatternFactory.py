@@ -7,14 +7,12 @@ class RhythemPatternFactory():
     
     def test(self):
         results = []
-        '''
         for x in range(10):
-            results.append(self.quarterNote)
-            results.append(self.quarterNote)
-            results.append(self.quarterNote)
-            results.append(self.quarterNote)
-            results.append(self.quarterTripletNote)
-            results.append(self.quarterTripletNote)
-            results.append(self.halfNote)
-        '''
+            results.append(.5)
+            results.append(.5)
+            results.append(.5)
+            results.append(.5)
+            results.append(.75)
+            results.append(.75)
+            results.append(.25)
         return results
