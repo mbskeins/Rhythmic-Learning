@@ -93,9 +93,9 @@ def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
     for word in words_to_rhyme:
         rhyming_sentence = create_rhyme_sentence(word)
         generated_sentences.append(rhyming_sentence)
-    the_rap = combine_sentences(lines,generated_sentences)
-    the_rap = return_tuple_in_list(the_rap)
+    the_rap = combine_sentences(lines,generated_sentences) # Tuple
+    the_rap = return_tuple_in_list(the_rap) # List of sentences
     return the_rap
-    #print(formatted_list_output(the_rap))
+    #print(formatted_list_output(the_rap)) # List of sentences broken down into words
 
 print('\n\n',rhyme_it(summary),'\n\n')
