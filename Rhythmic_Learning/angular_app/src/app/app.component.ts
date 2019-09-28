@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, AfterViewInit{
   apiObject$: Observable<TtsInstance[]>;
   userInput = '';
   getDataObj;
+  test1 = false;
   
   constructor(
     private syncService: SyncRhythemService,
