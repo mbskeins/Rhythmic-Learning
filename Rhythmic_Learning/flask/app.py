@@ -12,6 +12,8 @@ from flask_sqlalchemy import SQLAlchemy
 from stop_words import stops
 from collections import Counter
 from bs4 import BeautifulSoup
+from factories.RhythemPatternFactory import RhythemPatternFactory
+from models.TtsInstance import TtsInstance
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -19,32 +21,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 q = Queue(connection=conn)
-
-from models import *
-
-class RhythemPatternGenerator():
-    def __init__(self):
-        self.quarterNote = .5
-        self.halfNote = 1
-        self.quarterTripletNote = .75
-    
-    def test(self):
-        results = []
-        for x in range(10):
-            results.append(self.quarterNote)
-            results.append(self.quarterNote)
-            results.append(self.quarterNote)
-            results.append(self.quarterNote)
-            results.append(self.quarterTripletNote)
-            results.append(self.quarterTripletNote)
-            results.append(self.quarterTripletNote)
-            results.append(self.halfNote)
-        return results
-
-class TtsInstance():
-    def __init__(self, text, delay):
-        self.text = text
-        self.delay = delay
 
 def to_dict(obj):
     return obj.__dict__
@@ -57,8 +33,8 @@ def index():
 #def generate(wiki_term):
 @app.route("/api/generate/", methods=['GET'])
 def generate():
-    generator = RhythemPatternGenerator()
-    delays = generator.test()
+    factory = RhythemPatternFactory()
+    delays = factory.test()
     sylabs = ['The s', 'heeps in the ', 'me', 'a', 'dow, the ', 'cows in the ', 'corn. re', 'fres', 'h e', 'dit ', 'de', 'le', 'te sour', 'ce rap', 'ge', 'ni', 'us T', 'ha', 't ', 'mil', 'ke', 'd the ', 'cow wit', 'h the ', 'crum', 'ple', 'd hor', 'n, Old ', 'Brind', 'le has ', 'go', 'ne to the neigh', 'bors ', 'Cold chic', 'ken a', 'plen', 'ty', ' ', 'for a ', 'me', 'al']
     results = []
     for x in range(min(len(sylabs), len(delays))):
