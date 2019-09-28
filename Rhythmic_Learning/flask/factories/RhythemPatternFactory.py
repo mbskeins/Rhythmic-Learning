@@ -5,14 +5,6 @@ class RhythemPatternFactory():
     def __init__(self):
         pass
     
-    def test(self):
-        results = []
-        for x in range(10):
-            results.append(0)
-            results.append(.5)
-            results.append(.5)
-            results.append(.5)
-        return results
 
 '''
             results.append(.5)

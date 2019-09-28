@@ -31,13 +31,17 @@ def index():
 #def generate(wiki_term):
 @app.route("/api/generate/", methods=['GET'])
 def generate():
+    '''
     factory = RhythemPatternFactory()
     delays = factory.test()
     sylabs = ['tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack']
     results = []
     for x in range(min(len(sylabs), len(delays))):
         results.append(TtsInstance(sylabs[x], delays[x]))
-    return json.dumps(results, default=to_dict)
+        return json.dumps(results, default=to_dict)
+        '''
+    return json.dumps([])
+    
 
 if __name__ == '__main__':
     app.run()
