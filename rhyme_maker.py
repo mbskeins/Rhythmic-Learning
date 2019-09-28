@@ -62,7 +62,6 @@ def combine_sentences(list1,list2): # Combines two sentences in order
     new_list = zip(list1,list2)
     
     for item1,item2 in new_list:
-        print('\n')
         print(item1)
         print(item2)
         print('\n')
