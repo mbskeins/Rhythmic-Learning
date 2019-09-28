@@ -13,7 +13,6 @@ import { bounce, fadeIn, fadeOut } from 'ng-animate';
   providers: [HttpService],
   animations: [
     trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
-    trigger('fadeOut', [transition('* => *', useAnimation(fadeOut))])
   ],
 })
 export class AppComponent implements OnInit, AfterViewInit{
@@ -23,7 +22,6 @@ export class AppComponent implements OnInit, AfterViewInit{
   getDataObj;
   test1 = false;
   fadeIn: any;
-  fadeOut: any;
   
   constructor(
     private syncService: SyncRhythemService,
