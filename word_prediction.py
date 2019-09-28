@@ -7,6 +7,13 @@ from keras.layers import LSTM
 from keras.layers import Embedding
 import wikipedia
 import preprocess_text as ppt
+import pickle
+
+with open('models/model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+with open('models/tokenizer.pkl', 'rb') as f:
+    tokenizer = pickle.load(f)
 
 # generate a sequence from the model
 def generate_seq(model, tokenizer, seed_text, n_words):
@@ -26,6 +33,7 @@ def generate_seq(model, tokenizer, seed_text, n_words):
 				break
 		# append to input
 		in_text, result = out_word, result + ' ' + out_word
+
 	return result
 
 # source text
@@ -67,3 +75,15 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.fit(X, y, epochs=100, verbose=2)
 # evaluate
 print(generate_seq(model, tokenizer, 'superhero', 5))
+def reverse_sequence(sequence):
+    reversed_sentence = ''
+    for word in reversed(sequence.split()):
+        reversed_sentence += word + ' '
+
+    return reversed_sentence
+
+
+sequence = generate_seq(model, tokenizer, 'term', 4)
+reversed_sentence = reverse_sequence(sequence)
+
+print(reversed_sentence)

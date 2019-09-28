@@ -7,7 +7,7 @@ import pyphen
 import numpy as np
 
 # Get page on a specific topic from wikipedia
-p = wikipedia.page('chase bank')
+p = wikipedia.page('money')
 
 page_url = p.url
 page_title = p.title
