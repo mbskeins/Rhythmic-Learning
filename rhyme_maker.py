@@ -15,7 +15,7 @@ with open('models/tokenizer.pkl', 'rb') as f:
 
 adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"]
 
-summary = wikipedia.page("Payment").summary
+summary = wikipedia.page('facebook').summary
 last_word_list = [] # Array of last words of each sentence in order
 
 def clean_page_content(page_content):
@@ -98,4 +98,9 @@ def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
     return the_rap
     #print(formatted_list_output(the_rap)) # List of sentences broken down into words
 
-print('\n\n',rhyme_it(summary),'\n\n')
+result = rhyme_it(summary)
+
+for sent in result:
+    print()
+    print(sent)
+    print()
