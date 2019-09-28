@@ -1,14 +1,13 @@
+from enums.RhythemPatternEnums import RhythemPatternEnums
+from enums.NoteTimeEnums import NoteTimeEnums
+
 class RhythemPatternFactory():
-
-
     def __init__(self):
-        self.measureLength = 2
-        self.quarterNote = .5
-        self.halfNote = 1
-        self.quarterTripletNote = .75
+        pass
     
     def test(self):
         results = []
+        '''
         for x in range(10):
             results.append(self.quarterNote)
             results.append(self.quarterNote)
@@ -17,4 +16,5 @@ class RhythemPatternFactory():
             results.append(self.quarterTripletNote)
             results.append(self.quarterTripletNote)
             results.append(self.halfNote)
+        '''
         return results

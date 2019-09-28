@@ -52,7 +52,7 @@ private playMusic(){
   if(!this.isPlaying) {
     setTimeout(() => {
       this.music.play();
-    }, 3.5);
+    }, 3);
   }
   this.isPlaying = true;
 }
