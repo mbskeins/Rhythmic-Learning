@@ -5,6 +5,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 from keras.layers import Embedding
+import wikipedia
+import preprocess_text as ppt
 
 # generate a sequence from the model
 def generate_seq(model, tokenizer, seed_text, n_words):
@@ -27,15 +29,19 @@ def generate_seq(model, tokenizer, seed_text, n_words):
 	return result
 
 # source text
-data = """ Jack and Jill went up the hill\n
-		To fetch a pail of water\n
-		Jack fell down and broke his crown\n
-		And Jill came tumbling after\n """
+data = ppt.grabSummaries() #wikipedia.page("List of Marvel Cinematic Universe films").content
+print(data)
+# data = """ Jack and Jill went up the hill\n
+# 		To fetch a pail of water\n
+# 		Jack fell down and broke his crown\n
+# 		And Jill came tumbling after\n """
+
 # integer encode text
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts([data])
 encoded = tokenizer.texts_to_sequences([data])[0]
 # determine the vocabulary size
+print("-->", tokenizer.word_index)
 vocab_size = len(tokenizer.word_index) + 1
 print('Vocabulary Size: %d' % vocab_size)
 # create word -> word sequences
@@ -58,6 +64,6 @@ print(model.summary())
 # compile network
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 # fit network
-model.fit(X, y, epochs=500, verbose=2)
+model.fit(X, y, epochs=100, verbose=2)
 # evaluate
-print(generate_seq(model, tokenizer, 'fetch', 3))
+print(generate_seq(model, tokenizer, 'superhero', 5))
