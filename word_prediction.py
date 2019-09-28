@@ -1,4 +1,12 @@
 from numpy import array
+from keras.preprocessing.text import Tokenizer
+from keras.utils import to_categorical
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Embedding
+import wikipedia
+import preprocess_text as ppt
 import pickle
 
 with open('models/model.pkl', 'rb') as f:
@@ -75,7 +83,7 @@ def reverse_sequence(sequence):
     return reversed_sentence
 
 
-sequence = generate_seq(model, tokenizer, 'term', 7)
+sequence = generate_seq(model, tokenizer, 'term', 4)
 reversed_sentence = reverse_sequence(sequence)
 
 print(reversed_sentence)

@@ -2,7 +2,9 @@ from numpy import array
 from keras.preprocessing.text import Tokenizer
 from keras.utils import to_categorical
 from keras.models import Sequential
-from keras.layers import Dense, LSTM, Embedding
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers import Embedding
 
 import preprocess_text as preprocess
 
