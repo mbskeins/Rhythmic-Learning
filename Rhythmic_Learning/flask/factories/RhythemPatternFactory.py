@@ -16,6 +16,5 @@ class RhythemPatternFactory():
             results.append(self.quarterNote)
             results.append(self.quarterTripletNote)
             results.append(self.quarterTripletNote)
-            results.append(self.quarterTripletNote)
             results.append(self.halfNote)
         return results

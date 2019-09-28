@@ -33,7 +33,7 @@ def index():
 def generate():
     factory = RhythemPatternFactory()
     delays = factory.test()
-    sylabs = ['The s', 'heeps in the ', 'me', 'a', 'dow, the ', 'cows in the ', 'corn. re', 'fres', 'h e', 'dit ', 'de', 'le', 'te sour', 'ce rap', 'ge', 'ni', 'us T', 'ha', 't ', 'mil', 'ke', 'd the ', 'cow wit', 'h the ', 'crum', 'ple', 'd hor', 'n, Old ', 'Brind', 'le has ', 'go', 'ne to the neigh', 'bors ', 'Cold chic', 'ken a', 'plen', 'ty', ' ', 'for a ', 'me', 'al']
+    sylabs = ['tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack']
     results = []
     for x in range(min(len(sylabs), len(delays))):
         results.append(TtsInstance(sylabs[x], delays[x]))
