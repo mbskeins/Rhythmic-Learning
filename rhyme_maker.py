@@ -15,7 +15,7 @@ with open('models/tokenizer.pkl', 'rb') as f:
 
 adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"]
 
-summary = wikipedia.page("Money").summary
+summary = wikipedia.page("Payment").summary
 last_word_list = [] # Array of last words of each sentence in order
 
 def clean_page_content(page_content):
@@ -60,15 +60,20 @@ def create_rhyme_sentence(word):
 
 def combine_sentences(list1,list2): # Combines two sentences in order
     new_list = zip(list1,list2)
-    
-    for item1,item2 in new_list:
-        print(item1)
-        print(item2)
-        print('\n')
     return new_list
 
+def print_tuple(tupled_list):
+    formatted_list = []
+    for item1,item2 in tupled_list:
+        print(item1)
+        formatted_list.append(item1)
+        print(item2)
+        formatted_list.append(item2)
+        print('\n')
+    return formatted_list
+
 def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
-    print(summary)
+    print("Summary:",summary)
     lines = clean_page_content(summary)
     words_to_rhyme = get_last_word(lines)
     generated_sentences = []
@@ -76,6 +81,8 @@ def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
         rhyming_sentence = create_rhyme_sentence(word)
         generated_sentences.append(rhyming_sentence)
     the_rap = combine_sentences(lines,generated_sentences)
+    the_rap = print_tuple(the_rap)
+    print(the_rap)
 
 
 print('\n\n',rhyme_it(summary),'\n\n')
