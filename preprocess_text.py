@@ -12,9 +12,9 @@ def grab_summaries():
     for page in rand:
         try:
             p = wikipedia.page(page)
+            summary_text_joined += str(p.summary)
         except wikipedia.DisambiguationError as e:
             pass
-        summary_text_joined += str(p.summary)
 
     return summary_text_joined
 
