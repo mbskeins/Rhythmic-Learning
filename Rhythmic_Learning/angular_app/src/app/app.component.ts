@@ -20,7 +20,7 @@ export class AppComponent implements OnInit{
   test(){
     console.log("fuck");
     var sound = new Howl({
-      src: ['sound.mp3'],
+      src: ['static/sound.mp3'],
       onend: function() {
           console.log('Finished!');
       },

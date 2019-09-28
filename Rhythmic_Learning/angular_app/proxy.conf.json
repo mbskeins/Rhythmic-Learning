@@ -1,6 +1,7 @@
 {
-    "/mp3Enpoint": {
-        "target": "https://www.free-stock-music.com/music/",
-        "secure": false
+    "/static": {
+        "target": "http://localhost:5000/static/",
+        "secure": false,
+        "pathRewrite": {"^/static" : ""}
     }
 }
