@@ -6,7 +6,7 @@ import string
 import pyphen
 
 # Get page on a specific topic from wikipedia
-p = wikipedia.page('chase bank')
+p = wikipedia.page('money')
 
 page_url = p.url
 page_title = p.title
@@ -39,5 +39,3 @@ def sylabize_all_words(cleaned_sentences):
 cleaned_sentences = clean_page_content(page_content)
 
 hyphened_sentences = sylabize_all_words(cleaned_sentences)
-
-print(hyphened_sentences)
