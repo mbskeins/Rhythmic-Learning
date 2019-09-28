@@ -72,6 +72,19 @@ def print_tuple(tupled_list):
         print('\n')
     return formatted_list
 
+def return_tuple_in_list(tupled_list):
+    formatted_list = []
+    for item1,item2 in tupled_list:
+        formatted_list.append(item1)
+        formatted_list.append(item2)
+    return formatted_list
+
+def formatted_list_output(formatted_list):
+    master_list = []
+    for line in formatted_list:
+        master_list.append(line.split(" "))
+    return master_list
+
 def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
     print("Summary:",summary)
     lines = clean_page_content(summary)
@@ -81,8 +94,8 @@ def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
         rhyming_sentence = create_rhyme_sentence(word)
         generated_sentences.append(rhyming_sentence)
     the_rap = combine_sentences(lines,generated_sentences)
-    the_rap = print_tuple(the_rap)
-    print(the_rap)
-
+    the_rap = return_tuple_in_list(the_rap)
+    return the_rap
+    #print(formatted_list_output(the_rap))
 
 print('\n\n',rhyme_it(summary),'\n\n')
