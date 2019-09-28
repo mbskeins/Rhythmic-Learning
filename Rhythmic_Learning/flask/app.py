@@ -44,7 +44,7 @@ def generate():
         results.append(TtsInstance(sylabs[x], delays[x]))
         return json.dumps(results, default=to_dict)
         '''
-    return json.dumps(result)
+    return json.dumps(result, default=to_dict)
     
 
 if __name__ == '__main__':
