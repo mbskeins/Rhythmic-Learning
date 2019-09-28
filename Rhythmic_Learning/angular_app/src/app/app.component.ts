@@ -40,6 +40,6 @@ export class AppComponent implements OnInit, AfterViewInit{
   test(){
     this.http.postTopic(this.userInput);
     this.apiObject$.subscribe(data => console.log(data))
-    //this.syncService.startTts();
+    this.syncService.startTts();
   }
 }
