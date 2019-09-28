@@ -8,6 +8,13 @@ class RhythemPatternFactory():
     def test(self):
         results = []
         for x in range(10):
+            results.append(0)
+            results.append(.5)
+            results.append(.5)
+            results.append(.5)
+        return results
+
+'''
             results.append(.5)
             results.append(.5)
             results.append(.5)
@@ -15,4 +22,4 @@ class RhythemPatternFactory():
             results.append(.75)
             results.append(.75)
             results.append(.25)
-        return results
+'''

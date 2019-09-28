@@ -64,15 +64,10 @@ private playMusic(){
       sound.init({
         'volume': 1,
         'lang': 'en-GB',
-        'rate': 2,
+        'rate': 1.2,
         'pitch': 1,
         'voice':'Google UK English Male',
-        'splitSentences': true,
-        'listeners': {
-          'onvoiceschanged': (voices) => {
-            console.log("Event voiceschanged", voices)
-          }
-        }
+        'splitSentences': true
       });
       results.push({
         "sound": sound,
