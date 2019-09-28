@@ -36,7 +36,7 @@ def reverse_sequence(sequence):
     return reversed_sentence
 
 
-sequence = generate_seq(model, tokenizer, 'term', 7)
+sequence = generate_seq(model, tokenizer, 'bone', 4)
 reversed_sentence = reverse_sequence(sequence)
 
 print(reversed_sentence)

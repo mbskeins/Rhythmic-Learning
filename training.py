@@ -4,21 +4,10 @@ from keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import Dense, LSTM, Embedding
 
-import preprocess_text as preprocess
-
 import pickle
 
-
-# source text
-import wikipedia
-p = wikipedia.page('money')
-
-page_url = p.url
-page_title = p.title
-page_content = p.content # Content of page
-data = preprocess.clean_page_content(page_content)
-data = ''.join(data)
-
+with open('corpuses/corpus.pkl', 'rb') as f:
+    data = pickle.load(f)
 
 # integer encode text
 tokenizer = Tokenizer()
@@ -54,7 +43,7 @@ print(model.summary())
 # compile network
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 # fit network
-model.fit(X, y, epochs=200, verbose=2)
+model.fit(X, y, epochs=150, verbose=1)
 
 # Pickle the model and the tokenizer
 with open('models/model.pkl', 'wb') as f:
