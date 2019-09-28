@@ -2,11 +2,14 @@
     <mat-card class="fill">
         <h1 align="center">WELCOME TO RHYTHMEC LEARNING</h1>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <mat-form-field class="center2" appearance="outline">
+        <mat-form-field (keyup)="onKey($event)" class="center" appearance="outline">
             <mat-label>Outline form field</mat-label>
             <input matInput placeholder="Placeholder">
         </mat-form-field><br><br>
-        <button mat-raised-button class="center" color="primary" (click)="test()">Play</button>
+        <button mat-raised-button class="center2"  (click)="test()" color="primary">Play</button>
+        
+        <p align="center">{{userInput}}</p>
+
         <script type="text/javascript"
             src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>
     </mat-card>

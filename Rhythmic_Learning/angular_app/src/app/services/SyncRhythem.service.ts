@@ -20,14 +20,17 @@ constructor() {
 
 private generateTestData(){
   var number = 40;
-  var delay = .5;
+  //.75 = 1/4 triplet notes; .5 = 1/4 notes; 1 = 1/2 notes;
+  var delay = .75;
   var results = [];
-  for(var i = 0; i < number; ++i){
+  var generator = new RhythemPatternGenerator();
+  var delays = generator.generateTestDelays();
+  delays.forEach((delay1) => {
     results.push({
       "text": "test",
-      "delay": delay
+      "delay": delay1
     });
-  }
+  });
   return results;
 }
 
@@ -55,14 +58,6 @@ public startTts(){
           },
           onpause: () => {
             //this.isPlaying = false;
-          },
-          onboundary: event => {
-            console.log(
-              event.name +
-                " boundary reached after " +
-                event.elapsedTime +
-                " milliseconds."
-            );
           }
         }
       });
@@ -74,7 +69,7 @@ private playMusic(){
   if(!this.isPlaying) {
     setTimeout(() => {
       this.music.play();
-    }, 4);
+    }, 3.5);
   }
   this.isPlaying = true;
 }
@@ -102,6 +97,33 @@ private playMusic(){
         "delay": data.delay
       });
     });
+    return results;
+  }
+}
+
+class RhythemPatternGenerator{
+  private quarterNote: number;
+  private quarterTripletNote: number;
+  private halfNote: number;
+
+  //at 120 BPM
+  constructor(){
+    this.quarterNote = .5;
+    this.halfNote = 1;
+    this.quarterTripletNote = .75;
+  }
+
+  public generateTestDelays(){
+    var results = [];
+    for(var i = 0; i < 10; ++i){
+      results.push(this.quarterNote);
+      results.push(this.quarterNote);
+      results.push(this.quarterNote);
+      results.push(this.quarterNote);
+      results.push(this.quarterTripletNote);
+      results.push(this.quarterTripletNote);
+      results.push(this.halfNote);
+    }
     return results;
   }
 }
