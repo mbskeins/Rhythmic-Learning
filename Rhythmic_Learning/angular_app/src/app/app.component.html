@@ -1,5 +1,5 @@
 <mat-card class="fill">
-    <div *ngIf="test1 == false">
+    <div *ngIf="test1 == false" align="center">
         <!-- <h1 align="center">WELCOME TO RHYTHMEC LEARNING</h1>
         <br><br><br><br><br><br><br>
         <mat-spinner class="spinner"></mat-spinner>
@@ -15,7 +15,9 @@
         <p align="center" class="textStyle">{{uiText.str}}</p>
 
         <br><br><br>
-        <button mat-raised-button class="center2" (click)="test()" color="primary">Play</button>
+            <div [@fadeOut]="fadeOut">
+                <button mat-raised-button (click)="test()" color="primary">Play</button>
+            </div>
 
         <script type="text/javascript"
             src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>

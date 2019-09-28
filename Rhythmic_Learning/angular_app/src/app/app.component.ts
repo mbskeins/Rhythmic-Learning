@@ -3,12 +3,18 @@ import {SyncRhythemService} from 'src/app/services/SyncRhythem.service';
 import { Observable } from 'rxjs';
 import { HttpService } from './services/HttpService.service';
 import { TtsInstance } from './models/TtsInstance'
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { bounce, fadeIn, fadeOut } from 'ng-animate';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [HttpService]
+  providers: [HttpService],
+  animations: [
+    trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
+    trigger('fadeOut', [transition('* => *', useAnimation(fadeOut))])
+  ],
 })
 export class AppComponent implements OnInit, AfterViewInit{
   title = 'RhythmicLearning';
@@ -16,6 +22,8 @@ export class AppComponent implements OnInit, AfterViewInit{
   uiText = {str: ""};
   getDataObj;
   test1 = false;
+  fadeIn: any;
+  fadeOut: any;
   
   constructor(
     private syncService: SyncRhythemService,
