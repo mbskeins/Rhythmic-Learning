@@ -14,6 +14,7 @@ from collections import Counter
 from bs4 import BeautifulSoup
 from factories.RhythemPatternFactory import RhythemPatternFactory
 from models.TtsInstance import TtsInstance
+from helpers.serializationHelper import *
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -21,9 +22,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 q = Queue(connection=conn)
-
-def to_dict(obj):
-    return obj.__dict__
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
