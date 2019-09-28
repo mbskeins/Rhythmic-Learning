@@ -1,7 +1,6 @@
-
-    <mat-card class="fill">
-        <div *ngIf="test1 == false">
-        <h1 align="center">WELCOME TO RHYTHMEC LEARNING</h1>
+<mat-card class="fill">
+    <div *ngIf="test1 == false" align="center">
+        <!-- <h1 align="center">WELCOME TO RHYTHMEC LEARNING</h1>
         <br><br><br><br><br><br><br>
         <mat-spinner class="spinner"></mat-spinner>
         <br><br><br><br><br><br><br><br><br>
@@ -9,11 +8,23 @@
             <mat-label>Outline form field</mat-label>
             <input matInput placeholder="Placeholder">
         </mat-form-field><br><br>
-        <button mat-raised-button class="center2" (click)="test()" color="primary">Play</button>
-        
-        <p align="center">{{userInput}}</p>
+        <button mat-raised-button class="center2" (click)="test()" color="primary">Play</button> -->
+
+        <br><br><br><br><br><br><br><br>
+        <p align="center" class="textStyle">{{uiText.str}}</p>
+
+        <br><br><br><br><br><br><br>
+        <br><br><br>
+        <div [@fadeIn]="fadeIn">
+            <mat-form-field (keyup)="onKey($event)" class="main" appearance="outline">
+                <mat-label>Input Topic</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button (click)="test()" color="primary">Play</button>
+        </div>
 
         <script type="text/javascript"
             src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>
-        </div>
-    </mat-card>
+    </div>
+</mat-card>

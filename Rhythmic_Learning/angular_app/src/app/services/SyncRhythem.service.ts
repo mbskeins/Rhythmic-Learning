@@ -18,13 +18,16 @@ constructor() {
   })
 }
 
-public startTts(TtsInstances: TtsInstance[]){
+public startTts(TtsInstances: TtsInstance[], uiText){
   var parsedData = this.buildSounds(TtsInstances);
   var secondTotal = 0;
   parsedData.forEach(data => {
     secondTotal += data.delay;
     var miliTotal = secondTotal * 1000;
     setTimeout(() => {
+      console.log(data);
+      uiText.str = data.text;
+      console.log(uiText.str);
       data.sound.speak({
         text: data.text,
         queue: false,

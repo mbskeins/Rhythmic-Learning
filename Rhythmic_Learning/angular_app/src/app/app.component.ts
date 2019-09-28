@@ -3,19 +3,25 @@ import {SyncRhythemService} from 'src/app/services/SyncRhythem.service';
 import { Observable } from 'rxjs';
 import { HttpService } from './services/HttpService.service';
 import { TtsInstance } from './models/TtsInstance'
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { bounce, fadeIn, fadeOut } from 'ng-animate';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [HttpService]
+  providers: [HttpService],
+  animations: [
+    trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
+  ],
 })
 export class AppComponent implements OnInit, AfterViewInit{
   title = 'RhythmicLearning';
   apiObject$: Observable<TtsInstance[]>;
-  userInput = '';
+  uiText = {str: ""};
   getDataObj;
   test1 = false;
+  fadeIn: any;
   
   constructor(
     private syncService: SyncRhythemService,
@@ -36,13 +42,13 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   onKey(event: any) {
-    this.userInput = event.target.value;
+    this.uiText = event.target.value;
   }
 
   test(){
-    this.http.postTopic(this.userInput);
+    this.http.postTopic(this.uiText);
     this.apiObject$.subscribe(data => {
-      this.syncService.startTts(data);
+      this.syncService.startTts(data, this.uiText);
     });
   }
 }
