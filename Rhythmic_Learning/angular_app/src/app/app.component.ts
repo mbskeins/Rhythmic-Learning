@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import {SyncRhythemService} from 'src/app/services/SyncRhythem.service';
 import { Observable } from 'rxjs';
 import { HttpService } from './services/HttpService.service';
@@ -9,10 +9,11 @@ import { HttpService } from './services/HttpService.service';
   styleUrls: ['./app.component.scss'],
   providers: [HttpService]
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, AfterViewInit{
   title = 'RhythmicLearning';
-  apiObject$: Observable<object>[];
+  apiObject$: Observable<Object>;
   userInput = '';
+  getDataObj;
   
   constructor(
     private syncService: SyncRhythemService,
@@ -20,7 +21,16 @@ export class AppComponent implements OnInit{
     ){}
 
   ngOnInit(){
-    this.http.getData();
+    this.apiObject$ =this.http.getData();
+  }
+
+  ngAfterViewInit(){
+    console.log(this.apiObject$.subscribe(data => {
+      //console.log(data);
+      this.getDataObj = data;
+      console.log("printing data object");
+      console.log(this.getDataObj);
+    }))
   }
 
   onKey(event: any) {
@@ -29,6 +39,7 @@ export class AppComponent implements OnInit{
 
   test(){
     this.http.postTopic(this.userInput);
+    this.apiObject$.subscribe(data => console.log(data))
     //this.syncService.startTts();
   }
 }

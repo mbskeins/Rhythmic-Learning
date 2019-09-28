@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class HttpService {
   constructor(private http: HttpClient) { }
 
 
-  getData() {
-    this.http.get('https://api.github.com/users')
-        .subscribe(data => console.log(data))
+  getData(): Observable<Object> {
+    return this.http.get('https://api.github.com/users');
   }
       // test query
       // https://angular-http-guide.firebaseio.com/courses.json?orderBy="$key"&limitToFirst=1
