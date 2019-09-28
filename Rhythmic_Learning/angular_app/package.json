@@ -23,6 +23,7 @@
     "@angular/router": "~8.2.5",
     "howler": "^2.1.2",
     "rxjs": "~6.4.0",
+    "speak-tts": "^2.0.8",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

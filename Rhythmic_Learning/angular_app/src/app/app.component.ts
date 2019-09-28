@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {SyncRhythemService} from 'src/app/services/SyncRhythem.service'
-import {Howl, Howler} from 'howler'
 
 @Component({
   selector: 'app-root',
@@ -18,15 +17,6 @@ export class AppComponent implements OnInit{
   }
 
   test(){
-    console.log("fuck");
-    var sound = new Howl({
-      src: ['static/sound.mp3'],
-      onend: function() {
-          console.log('Finished!');
-      },
-      onloaderror: function() {
-          console.log('Error!');
-      },
-  }).play();
+    this.syncService.startTts();
   }
 }
