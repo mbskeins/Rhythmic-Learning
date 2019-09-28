@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@ang
 import {SyncRhythemService} from 'src/app/services/SyncRhythem.service';
 import { Observable } from 'rxjs';
 import { HttpService } from './services/HttpService.service';
+import { TtsInstance } from './models/TtsInstance'
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { HttpService } from './services/HttpService.service';
 })
 export class AppComponent implements OnInit, AfterViewInit{
   title = 'RhythmicLearning';
-  apiObject$: Observable<Object>;
+  apiObject$: Observable<TtsInstance[]>;
   userInput = '';
   getDataObj;
   
@@ -21,16 +22,16 @@ export class AppComponent implements OnInit, AfterViewInit{
     ){}
 
   ngOnInit(){
-    this.apiObject$ =this.http.getData();
+    this.apiObject$ =this.http.getTestData();
   }
 
   ngAfterViewInit(){
-    console.log(this.apiObject$.subscribe(data => {
-      //console.log(data);
-      this.getDataObj = data;
-      console.log("printing data object");
-      console.log(this.getDataObj);
-    }))
+    // console.log(this.apiObject$.subscribe(data => {
+    //   //console.log(data);
+    //   this.getDataObj = data;
+    //   console.log("printing data object");
+    //   console.log(this.getDataObj);
+    // }))
   }
 
   onKey(event: any) {
@@ -39,7 +40,8 @@ export class AppComponent implements OnInit, AfterViewInit{
 
   test(){
     this.http.postTopic(this.userInput);
-    this.apiObject$.subscribe(data => console.log(data))
-    this.syncService.startTts();
+    this.apiObject$.subscribe(data => {
+      this.syncService.startTts(data);
+    });
   }
 }

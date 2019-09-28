@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { debug } from 'util';
 import Speech from 'speak-tts'
 import {Howl, Howler} from 'howler'
+import { TtsInstance } from '../models/TtsInstance'
 
 @Injectable({
   providedIn: 'root'
@@ -18,25 +18,8 @@ constructor() {
   })
 }
 
-private generateTestData(){
-  var number = 40;
-  //.75 = 1/4 triplet notes; .5 = 1/4 notes; 1 = 1/2 notes;
-  var delay = .75;
-  var results = [];
-  var generator = new RhythemPatternGenerator();
-  var delays = generator.generateTestDelays();
-  delays.forEach((delay1) => {
-    results.push({
-      "text": "test",
-      "delay": delay1
-    });
-  });
-  return results;
-}
-
-public startTts(){
-  var data = this.generateTestData();
-  var parsedData = this.buildSounds(data);
+public startTts(TtsInstances: TtsInstance[]){
+  var parsedData = this.buildSounds(TtsInstances);
   var secondTotal = 0;
   parsedData.forEach(data => {
     secondTotal += data.delay;
@@ -74,7 +57,7 @@ private playMusic(){
   this.isPlaying = true;
 }
 
-  private buildSounds(data: any[]){
+  private buildSounds(data: TtsInstance[]){
     var results = [];
     data.forEach((data) => {
       const sound = new Speech();
@@ -97,33 +80,6 @@ private playMusic(){
         "delay": data.delay
       });
     });
-    return results;
-  }
-}
-
-class RhythemPatternGenerator{
-  private quarterNote: number;
-  private quarterTripletNote: number;
-  private halfNote: number;
-
-  //at 120 BPM
-  constructor(){
-    this.quarterNote = .5;
-    this.halfNote = 1;
-    this.quarterTripletNote = .75;
-  }
-
-  public generateTestDelays(){
-    var results = [];
-    for(var i = 0; i < 10; ++i){
-      results.push(this.quarterNote);
-      results.push(this.quarterNote);
-      results.push(this.quarterNote);
-      results.push(this.quarterNote);
-      results.push(this.quarterTripletNote);
-      results.push(this.quarterTripletNote);
-      results.push(this.halfNote);
-    }
     return results;
   }
 }
