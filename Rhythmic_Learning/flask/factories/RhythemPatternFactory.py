@@ -1,5 +1,8 @@
 class RhythemPatternFactory():
+
+
     def __init__(self):
+        self.measureLength = 2
         self.quarterNote = .5
         self.halfNote = 1
         self.quarterTripletNote = .75
