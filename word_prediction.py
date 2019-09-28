@@ -1,5 +1,4 @@
 from numpy import array
-from keras.preprocessing.text import Tokenizer
 import pickle
 
 with open('models/model.pkl', 'rb') as f:
@@ -37,7 +36,7 @@ def reverse_sequence(sequence):
     return reversed_sentence
 
 
-sequence = generate_seq(model, tokenizer, 'term', 4)
+sequence = generate_seq(model, tokenizer, 'term', 7)
 reversed_sentence = reverse_sequence(sequence)
 
 print(reversed_sentence)
