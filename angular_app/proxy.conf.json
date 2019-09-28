@@ -1,0 +1,6 @@
+{
+    "/mp3Enpoint": {
+        "target": "https://www.free-stock-music.com/music/",
+        "secure": false
+    }
+}
