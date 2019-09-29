@@ -39,19 +39,17 @@ export class AppComponent implements OnInit, AfterViewInit{
         var url = URL.createObjectURL(data.blob);
         this.adlibAudio = new Audio(url);
       });
+      syncService.playAudio.subscribe({
+        next: () => this.playAudio()
+      })
     }
 
   ngOnInit(){
-    //this.apiObject$ =this.http.getTestData();
+
   }
 
   ngAfterViewInit(){
-    // console.log(this.apiObject$.subscribe(data => {
-    //   //console.log(data);
-    //   this.getDataObj = data;
-    //   console.log("printing data object");
-    //   console.log(this.getDataObj);
-    // }))
+
   }
 
   onKey(event: any) {
@@ -60,8 +58,8 @@ export class AppComponent implements OnInit, AfterViewInit{
 
   test(){
     var list = [];
-    list.push(new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22));
-    this.syncService.startTts(list, this.uiText);
+    this.syncService.startTts(new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22));
+    //this.syncService.startTts(list, this.uiText);
     // this.apiObject$ = this.http.getTestData("this.uiText");
     // this.apiObject$.subscribe(data => {
     //   var list = [];
@@ -71,12 +69,10 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   startRecording(){
-    console.log("started");
     this.audioRecordingService.startRecording();
   }
 
   stopRecording(){
-    console.log("stopped");
     this.audioRecordingService.stopRecording();
   }
 
@@ -86,8 +82,11 @@ export class AppComponent implements OnInit, AfterViewInit{
     }
   }
 
+  preview(){
+    this.adlibAudio.play();
+  }
+
   toggleAdlib(){
     this.isAdLibButtonDown = !this.isAdLibButtonDown;
-    console.log(this.isAdLibButtonDown);
   }
 }
