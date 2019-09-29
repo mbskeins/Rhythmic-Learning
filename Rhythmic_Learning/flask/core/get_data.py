@@ -10,7 +10,7 @@ import re
 import pickle
 
 def grab_summaries():
-    rand = wikipedia.random(pages=10000)
+    rand = wikipedia.random(pages=250)
     summary_text_joined = ''
     for page in rand:
         try:
@@ -29,37 +29,44 @@ def grab_summaries():
 
 
 def clean_text(all_summaries):
-    words = set(nltk.corpus.words.words())
+    cleaned_summaries = ''
 
-    all_summaries = all_summaries.translate(str.maketrans('', '', string.punctuation))
+    all_summaries = nltk.sent_tokenize(all_summaries)
 
-    all_summaries = all_summaries.replace('°', '').replace('-', '').replace(" ' ", '')
 
-    all_summaries = re.sub(r"[\(\[].*?[\)\]]", "", all_summaries)
+    for sent in all_summaries:
 
-    all_summaries = ''.join([i for i in all_summaries if not i.isdigit()])
+        sent = sent.translate(str.maketrans('', '', string.punctuation))
 
-    all_summaries = ' '.join(w for w in nltk.wordpunct_tokenize(all_summaries) \
-                     if w.lower() in words or not w.isalpha())
+        sent = sent.replace('°', '').replace('-', '').replace(" ' ", '')
 
-    return all_summaries
+        sent = re.sub(r"[\(\[].*?[\)\]]", "", sent)
+
+        sent = ''.join([i for i in sent if not i.isdigit()])
+
+
+        sent += ' \n '
+
+        cleaned_summaries += sent
+
+
+
+    return cleaned_summaries
 
 big_summary = ''
 
-for i in range(9):
-    # Stage 1
-    print("Stage 1 [Started]")
+for i in range(1):
+    print('starting grab')
     all_summaries = grab_summaries()
-    print("Stage 1 [Finished]")
-    
-    # Stage 2
-    print("Stage 2 [Started]")
+
     big_summary += all_summaries
-    print("Stage 2 [Finished]")
+    print('got big summary')
 
-    print("Round "+ str(i) +" [Complete]")
+
 cleaned_summaries = clean_text(big_summary)
+print('finished!')
 
-with open('corpuses/largest-corpus.pkl', 'wb') as f:
+
+
+with open('corpuses/split_lines_corp.pkl', 'wb') as f:
     pickle.dump(cleaned_summaries, f)
-print("Data successfully saved.")
