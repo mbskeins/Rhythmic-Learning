@@ -12,4 +12,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  scrollTo(number: number){
+    window.scrollTo({
+      top: ((window.outerHeight + window.innerHeight)/2) * number,
+      behavior: 'smooth',
+    });
+  }
 }
