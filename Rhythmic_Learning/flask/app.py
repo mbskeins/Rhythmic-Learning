@@ -4,6 +4,8 @@ import operator
 import re
 import nltk
 import json
+from subprocess import *
+
 from rq import Queue
 from rq.job import Job
 from worker import conn
@@ -15,6 +17,7 @@ from bs4 import BeautifulSoup
 from factories.RhythemPatternFactory import RhythemPatternFactory
 from models.TtsInstance import TtsInstance
 from helpers.serializationHelper import *
+import subprocess
 
 import importlib.util
 spec = importlib.util.spec_from_file_location("module.name", "./core/rhyme_maker.py")
@@ -36,12 +39,15 @@ def index():
 #def generate(wiki_term):
 @app.route("/api/generate/<text>", methods=['GET'])
 def generate(text):
-    print(text)
-    result = ai.rhyme_it(text)
+    out = subprocess.check_output(['python3', '/Users/augmentedmode/Desktop/All-Repos/Hackathon2019/Rhythmic_Learning/flask/core/rhyme_maker.py', text]).decode("utf-8")
+    output = out.split("[Starting output]")[1].split("[Finished output]")[0].strip()
+    return output.replace("'", '"')
+
+    #result = ai.rhyme_it(text)
     #factory = RhythemPatternFactory()
     #result = factory.generate()
     # factory generate pass list of lists. return object created
-    # 
+    #
     '''
     delays = factory.test()
     sylabs = ['tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack']
@@ -50,7 +56,7 @@ def generate(text):
         results.append(TtsInstance(sylabs[x], delays[x]))
         return json.dumps(results, default=to_dict)
         '''
-    return json.dumps(result, default=to_dict)
+    #return json.dumps([], default=to_dict)
 
 if __name__ == '__main__':
     app.run()
