@@ -3,19 +3,24 @@ import wikipedia
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 import string
-import word_prediction as wp
+# from app.core.word_prediction import word_prediction as wp
 import pickle
 import random
+import importlib.util
+spec = importlib.util.spec_from_file_location("word_prediction", "./core/word_prediction.py")
+wp = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(wp)
 
-with open('models/model.pkl', 'rb') as f:
+with open('./core/models/model.pkl', 'rb') as f:
     model = pickle.load(f)
 
-with open('models/tokenizer.pkl', 'rb') as f:
+with open('./core/models/model.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
 
 adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"] # set of adlibs you can add to
 
-summary = wikipedia.page('facebook').summary
+
+# summary = wikipedia.page('facebook').summary
 last_word_list = [] # Array of last words of each sentence in order
 
 def clean_page_content(page_content):
@@ -95,7 +100,8 @@ def formatted_list_output(formatted_list):
     return master_list
 
 # Takes a summary and creates a Rhyme for the each line of the summary
-def rhyme_it(summary):
+def rhyme_it(topic):
+    summary = wikipedia.page(topic).summary
     print("Summary:",summary)
     lines = clean_page_content(summary)
     words_to_rhyme = get_last_word(lines)
@@ -111,11 +117,3 @@ def rhyme_it(summary):
     # the_rap = formatted_list_output(the_rap)
 
     return the_rap
-
-
-result = rhyme_it(summary)
-
-for sent in result:
-    print()
-    print(sent)
-    print()

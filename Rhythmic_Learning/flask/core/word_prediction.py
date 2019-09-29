@@ -1,10 +1,10 @@
 from numpy import array
 import pickle
 
-with open('models/model.pkl', 'rb') as f:
+with open('./core/models/model.pkl', 'rb') as f:
     model = pickle.load(f)
 
-with open('models/tokenizer.pkl', 'rb') as f:
+with open('./core/models/tokenizer.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
 
 # generate a sequence from the model
