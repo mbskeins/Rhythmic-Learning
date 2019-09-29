@@ -56,12 +56,15 @@ def create_rhyme_sentence(word):
         for rhyme in rhymables:
             try:
                 #print(word,"-->",rhyme)
-                seq = wp.generate_seq(model, tokenizer, rhyme, 7)
+                seq = wp.generate_seq(model, tokenizer, 208-1,rhyme, 7)
+                print("Seq:",seq)
                 reversed_sentence = wp.reverse_sequence(seq)
+                print("Rev:",reversed_sentence)
                 return reversed_sentence
                 break
             except:
                 if rhymables[-1] == rhyme:
+                    print("Rhyme:",rhyme,"-->",rhymables[-1])
                     return grab_random_adlib()
                 else:
                     pass
