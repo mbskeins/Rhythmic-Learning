@@ -10,17 +10,20 @@ import re
 import pickle
 
 def grab_summaries():
-    rand = wikipedia.random(pages=1000)
+    rand = wikipedia.random(pages=10000)
     summary_text_joined = ''
     for page in rand:
         try:
             p = wikipedia.page(page)
         except wikipedia.DisambiguationError as e:
+            p = ''
             pass
         except wikipedia.exceptions.PageError as e:
+            p = ''
             pass
 
-        summary_text_joined += str(p.summary).lower()
+        if p != '':
+            summary_text_joined += str(p.summary).lower()
 
     return summary_text_joined
 
@@ -41,10 +44,15 @@ def clean_text(all_summaries):
 
     return all_summaries
 
+big_summary = ''
 
-all_summaries = grab_summaries()
+for i in range(6):
 
-cleaned_summaries = clean_text(all_summaries)
+    all_summaries = grab_summaries()
 
-with open('corpuses/corpus.pkl', 'wb') as f:
+    big_summary += all_summaries
+
+cleaned_summaries = clean_text(big_summary)
+
+with open('corpuses/largest-corpus.pkl', 'wb') as f:
     pickle.dump(cleaned_summaries, f)
