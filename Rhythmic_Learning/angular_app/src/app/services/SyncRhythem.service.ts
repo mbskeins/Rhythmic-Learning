@@ -13,11 +13,11 @@ export class SyncRhythemService {
   private sentences: string[];
   currentSentenceIndex = 0;
 
-  constructor() { 
+  constructor() {
     console.log("SyncRhythem attached");
     this.music = new Howl({
       src: ['static/trap.mp3'],
-      volume: 0.5,
+      volume: 0.45,
       onend: () => {
         this.isBeatPlaying = false;
       }
@@ -32,7 +32,7 @@ export class SyncRhythemService {
     sound.init({
       'volume': 1,
       'lang': 'en-GB',
-      'rate': 1.05,
+      'rate': .8,
       'pitch': 1,
       'voice':voiceURI,
       'splitSentences': true
@@ -50,7 +50,7 @@ export class SyncRhythemService {
     var measureTimeMili = 0.35 * 1000 * 2;
     var startTimeInMili = new Date().getTime();
     var latencyPadding = 3;
-    
+
     setTimeout(() => {
       sound.speak({
         text: currentSentence,
@@ -69,7 +69,7 @@ export class SyncRhythemService {
         }
       });
     }, this.currentSentenceIndex === 0 ? 22.1*1000 : 0);
-    
+
     ++this.currentSentenceIndex;
   }
 

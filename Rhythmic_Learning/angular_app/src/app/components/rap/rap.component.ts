@@ -23,7 +23,7 @@ import { AdLib } from '../../models/AdLib';
 })
 export class RapComponent implements OnInit, AfterViewInit {
   title = 'RhythmicLearning';
-  apiObject$: Observable<TtsInstance[]>;
+  apiObject$: Observable<string[]>;
   uiText = {
     str: ""
   };
@@ -36,7 +36,7 @@ export class RapComponent implements OnInit, AfterViewInit {
   private adLibs: AdLib[];
   private numberOfAdlibs: number;
   private selectedVoiceURI: string;
-  
+
   constructor(
     private syncService: SyncRhythemService,
     private http: HttpService,
@@ -69,18 +69,26 @@ export class RapComponent implements OnInit, AfterViewInit {
   }
 
   test(){
+    console.log("testing")
+    this.apiObject$ = this.http.getRapLyrics(this.topicText);
+    this.apiObject$.subscribe((data) => {
+      console.log(data);
+      var test = ["Twinkle, twinkle, little, star", "How, I, wonder, what, you, are", "Up, above, the, world, so, high,", "Like, a, diamond, in, the, sky", "Twinkle, twinkle, little, star", "How, I, wonder, what, you, are", "When the blazing sun is gone", "When there's nothing he shines upon", "Then you show your little light", "Twinkle twinkle through the night", "Twinkle twinkle little star", "How I wonder what you are!", "In the dark blue sky so deep", "Through my curtains often peep", "For you never close your eyes", "Til the morning sun does rise", "Twinkle, twinkle, little star", "How I wonder what you are"];
+      this.syncService.startTtsWithSentences(data, this.selectedVoiceURI);
+    });
+
     // var ttsInstance = new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22);
     // this.syncService.startTts(ttsInstance);
 
-    var dataString;
-    this.apiObject$.subscribe(data => dataString = data);
-    this.apiObject$.subscribe(data => {
-      console.log(dataString);
-      var dataStringTts;
-      dataStringTts = new TtsInstance(dataString, 22);
-      console.log(dataStringTts);
+    //var dataString;
+    //this.apiObject$.subscribe(data => dataString = data);
+    //this.apiObject$.subscribe(data => {
+      //console.log(dataString);
+      //var dataStringTts;
+      //dataStringTts = new TtsInstance(dataString, 22);
+      //console.log(dataStringTts);
       //this.syncService.startTts(dataStringTts, this.uiText);
-    });
+    //});
   }
 
   startRecording(){

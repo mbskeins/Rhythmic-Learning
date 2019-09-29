@@ -1,12 +1,12 @@
 {
     "/static/*": {
-        "target": "https://rhythmic-learning.herokuapp.com/static/",
+        "target": "http://localhost:5000/static/",
         "secure": false,
         "pathRewrite": {"^/static" : ""},
         "changeOrigin": true
     },
     "/api/*": {
-        "target": "https://rhythmic-learning.herokuapp.com/api/",
+        "target": "http://localhost:5000/api/",
         "secure": false,
         "pathRewrite": {"^/api" : ""},
         "changeOrigin": true
