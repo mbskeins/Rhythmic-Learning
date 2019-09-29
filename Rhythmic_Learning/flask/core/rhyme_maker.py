@@ -20,7 +20,6 @@ with open('./core/models/model.pkl', 'rb') as f:
 adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"] # set of adlibs you can add to
 
 
-# summary = wikipedia.page('facebook').summary
 last_word_list = [] # Array of last words of each sentence in order
 
 def clean_page_content(page_content):
