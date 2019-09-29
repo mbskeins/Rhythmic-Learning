@@ -52,8 +52,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     var synth = window.speechSynthesis;
     setTimeout(() => {
       this.voices = synth.getVoices();
-      this.selectedVoiceURI = this.voices[1].voiceURI;
     }, 5);
+    this.selectedVoiceURI = "Google UK English Male";
   }
 
   ngAfterViewInit(){
@@ -73,7 +73,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.apiObject$ = this.http.getRapLyrics(this.topicText);
     this.apiObject$.subscribe((data) => {
       console.log(data);
-      this.syncService.startTtsWithSentences(data, this.selectedVoiceURI);
+      var test = ["Twinkle, twinkle, little, star", "How, I, wonder, what, you, are", "Up, above, the, world, so, high,", "Like, a, diamond, in, the, sky", "Twinkle, twinkle, little, star", "How, I, wonder, what, you, are", "When the blazing sun is gone", "When there's nothing he shines upon", "Then you show your little light", "Twinkle twinkle through the night", "Twinkle twinkle little star", "How I wonder what you are!", "In the dark blue sky so deep", "Through my curtains often peep", "For you never close your eyes", "Til the morning sun does rise", "Twinkle, twinkle, little star", "How I wonder what you are"];
+      this.syncService.startTtsWithSentences(test, this.selectedVoiceURI);
     });
   }
 

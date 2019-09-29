@@ -78,7 +78,7 @@ export class SyncRhythemService {
     sound.init({
       'volume': 1,
       'lang': 'en-GB',
-      'rate': 1.05,
+      'rate': .2,
       'pitch': .9,
       'voice': voiceURI,
       'splitSentences': true
