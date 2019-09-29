@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
-import {SyncRhythemService} from 'src/app/services/SyncRhythem.service';
+import { SyncRhythemService } from 'src/app/services/SyncRhythem.service';
 import { Observable } from 'rxjs';
 import { HttpService } from './services/HttpService.service';
 import { TtsInstance } from './models/TtsInstance'
@@ -15,7 +15,7 @@ import { bounce, fadeIn, fadeOut } from 'ng-animate';
     trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
   ],
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'RhythmicLearning';
   apiObject$: Observable<TtsInstance[]>;
   uiText = {
@@ -25,17 +25,17 @@ export class AppComponent implements OnInit, AfterViewInit{
   test1 = false;
   fadeIn: any;
   topicText = "";
-  
+
   constructor(
     private syncService: SyncRhythemService,
     private http: HttpService,
-    ){}
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     //this.apiObject$ =this.http.getTestData();
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     // console.log(this.apiObject$.subscribe(data => {
     //   //console.log(data);
     //   this.getDataObj = data;
@@ -48,25 +48,28 @@ export class AppComponent implements OnInit, AfterViewInit{
     this.topicText = event.target.value;
   }
 
-  test(){
-<<<<<<< HEAD
+  test() {
     console.log(this.uiText.str);
     console.log(this.topicText);
 
     this.apiObject$ = this.http.getTestData(this.topicText);
 
+
+    var dataString;
+    this.apiObject$.subscribe(data => dataString = data);
+    this.apiObject$.subscribe(data => {
+      console.log(dataString);
+      var dataStringTts;
+      dataStringTts = new TtsInstance(dataString, 22);
+      console.log(dataStringTts);
+      //this.syncService.startTts(dataStringTts, this.uiText);
+    });
+
+
     // this.apiObject$.subscribe(data => {
     //   this.syncService.startTts(data, this.uiText);
-=======
-    var list = [];
-    list.push(new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22));
-    this.syncService.startTts(list, this.uiText);
-    // this.apiObject$ = this.http.getTestData("this.uiText");
-    // this.apiObject$.subscribe(data => {
-    //   var list = [];
-    //   list.push(new TtsInstance("Twinkle, twinkle, little star, How I wonder what you are. Up above the world so high, Like a diamond in the sky. When the blazing sun is gone, When he nothing shines upon, Then you show your little light, Twinkle, twinkle, all the night.", 22));
-    //   this.syncService.startTts(list, this.uiText);
->>>>>>> e2fbc1fc2f82f05457798c233f6ed4eaf4710693
-    // });
+
+    //this.syncService.startTts(dataString, this.uiText);
+
   }
 }
