@@ -59,15 +59,8 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   test(){
-    var list = [];
-    this.syncService.startTts(new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22));
-    //this.syncService.startTts(list, this.uiText);
-    // this.apiObject$ = this.http.getTestData("this.uiText");
-    // this.apiObject$.subscribe(data => {
-    //   var list = [];
-    //   list.push(new TtsInstance("Twinkle, twinkle, little star, How I wonder what you are. Up above the world so high, Like a diamond in the sky. When the blazing sun is gone, When he nothing shines upon, Then you show your little light, Twinkle, twinkle, all the night.", 22));
-    //   this.syncService.startTts(list, this.uiText);
-    // });
+    var ttsInstance = new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22);
+    this.syncService.startTts(ttsInstance);
   }
 
   startRecording(){
