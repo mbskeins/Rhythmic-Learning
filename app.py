@@ -22,9 +22,9 @@ ai = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ai)
 
 app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
+#app.config.from_object(os.environ['APP_SETTINGS'])
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# db = SQLAlchemy(app)
 
 q = Queue(connection=conn)
 
