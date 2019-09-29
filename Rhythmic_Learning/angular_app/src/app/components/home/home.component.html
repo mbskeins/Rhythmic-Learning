@@ -18,10 +18,41 @@
        <p class="paragraphSize">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula id justo vitae sagittis. </p>
        <br><br><br><br><br><br><br>
        <br><br><br>
-   
-           <br>
-           <button mat-raised-button (click)="test()" color="primary">Play</button>
-           <br/>
+   </div>
+</mat-card>
+<br>
+
+<mat-card class="fill">
+    <div align="center">
+     
+       <br><br><br><br><br><br><br><br>
+       <h1>Impact:</h1>
+       <br>
+       <mat-grid-list cols="3" rowHeight="320px">
+          <mat-grid-tile>
+              <mat-icon  aria-hidden="false" aria-label="Example thumbs up SVG icon">show_chart</mat-icon>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <mat-icon  aria-hidden="false" aria-label="Example thumbs up SVG icon">emoji_people</mat-icon>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <mat-icon  aria-hidden="false" aria-label="Example thumbs up SVG icon">check_box</mat-icon>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <br>
+        <br>
+        <mat-grid-list cols="3" rowHeight="50px">
+            <mat-grid-tile>
+                <p align="center">Better Grades</p>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p align="center">More Engagment</p>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p align="center">Backed By Science</p>
+            </mat-grid-tile>
+          </mat-grid-list>
+          <br><br><br><br>
    </div>
 </mat-card>
 <br>
@@ -29,13 +60,32 @@
     <div align="center">
      
        <br><br><br><br><br><br><br><br>
-       <h1>fuck</h1>
-       <br><br><br>
-       <mat-grid-list cols="3" rowHeight="100px">
-          <mat-grid-tile>1</mat-grid-tile>
-          <mat-grid-tile>2</mat-grid-tile>
-          <mat-grid-tile>3</mat-grid-tile>
-        </mat-grid-list>
+       <h1>How'd We Do It?</h1>
+       <br><br><br><br>
 
+       <mat-tab-group mat-stretch-tabs>
+          <mat-tab label="Front End"> 
+              <br><br>
+              Angular
+          </mat-tab>
+          <mat-tab label="Back End"> 
+              <br><br>
+              Flask
+          </mat-tab>
+          <mat-tab label="AI"> 
+              <br><br>
+              Some Shit I Dont Understand
+          </mat-tab>
+        </mat-tab-group>
+   </div>
+</mat-card>
+<br>
+<mat-card class="fill">
+    <div align="center">
+     
+       <br><br><br><br><br><br><br><br>
+       <h1>We'll Show You</h1>
+       <br><br><br><br>
+       <button mat-raised-button (click)="test()" color="primary">Let's Go</button>
    </div>
 </mat-card>
