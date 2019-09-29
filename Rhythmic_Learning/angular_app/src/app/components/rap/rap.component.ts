@@ -12,7 +12,7 @@ import { AdLib } from '../../models/AdLib';
 @Component({
   selector: 'app-rap',
   templateUrl: './rap.component.html',
-  styleUrls: ['./rap.component.css'],
+  styleUrls: ['./rap.component.scss'],
   providers: [HttpService, AudioRecordingService],
   animations: [
     trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
