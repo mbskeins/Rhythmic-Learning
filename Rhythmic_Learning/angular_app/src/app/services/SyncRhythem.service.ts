@@ -55,7 +55,7 @@ private playMusic(){
   if(!this.isPlaying) {
     setTimeout(() => {
       this.music.play();
-    }, 3.5);
+    }, 3);
   }
   this.isPlaying = true;
 }
@@ -67,15 +67,10 @@ private playMusic(){
       sound.init({
         'volume': 1,
         'lang': 'en-GB',
-        'rate': 2,
-        'pitch': 1,
+        'rate': 1,
+        'pitch': 2,
         'voice':'Google UK English Male',
-        'splitSentences': true,
-        'listeners': {
-          'onvoiceschanged': (voices) => {
-            console.log("Event voiceschanged", voices)
-          }
-        }
+        'splitSentences': true
       });
       results.push({
         "sound": sound,
