@@ -33,12 +33,19 @@ def index():
 def generate(text):
     print(text)
     factory = RhythemPatternFactory()
+    result = factory.generate()
+    # factory generate pass list of lists. return object created
+    # 
+    '''
     delays = factory.test()
-    sylabs = ['The s', 'heeps in the ', 'me', 'a', 'dow, the ', 'cows in the ', 'corn. re', 'fres', 'h e', 'dit ', 'de', 'le', 'te sour', 'ce rap', 'ge', 'ni', 'us T', 'ha', 't ', 'mil', 'ke', 'd the ', 'cow wit', 'h the ', 'crum', 'ple', 'd hor', 'n, Old ', 'Brind', 'le has ', 'go', 'ne to the neigh', 'bors ', 'Cold chic', 'ken a', 'plen', 'ty', ' ', 'for a ', 'me', 'al']
+    sylabs = ['tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack', 'tack']
     results = []
     for x in range(min(len(sylabs), len(delays))):
         results.append(TtsInstance(sylabs[x], delays[x]))
-    return json.dumps(results, default=to_dict)
+        return json.dumps(results, default=to_dict)
+        '''
+    return json.dumps(result, default=to_dict)
+    
 
 if __name__ == '__main__':
     app.run()
