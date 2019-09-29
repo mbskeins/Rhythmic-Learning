@@ -3,22 +3,22 @@ import wikipedia
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 import string
-# from app.core.word_prediction import word_prediction as wp
+import word_prediction as wp
 import pickle
 import random
+
 import importlib.util
 spec = importlib.util.spec_from_file_location("word_prediction", "./core/word_prediction.py")
 wp = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(wp)
 
-with open('./core/models/model.pkl', 'rb') as f:
+with open('models/model-v5.pkl', 'rb') as f:
     model = pickle.load(f)
 
-with open('./core/models/model.pkl', 'rb') as f:
+with open('models/tokenizer-v5.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
 
-adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"] # set of adlibs you can add to
-
+adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"]
 
 last_word_list = [] # Array of last words of each sentence in order
 
@@ -35,30 +35,28 @@ def clean_page_content(page_content):
 def grab_random_adlib():
     return random.choice(adlibs)
 
-# returns list of last words of each sentence
 def get_last_word(lines):
     for line in lines:
         words = line.split(" ")
         last_word_list.append(words[-1])
-
     return last_word_list
 
 def find_rhyme_word(word):
     return pronouncing.rhymes(word)
 
 def create_rhyme_sentence(word):
-    # rhymables is the list of words that rhymes with the given word
     rhymables = find_rhyme_word(word)
-    print(rhymables)
     if len(rhymables) < 1:
-        # random adlib if no rhymable words
-        return grab_random_adlib() 
+        return grab_random_adlib()
     else:
         for rhyme in rhymables:
+            print(rhyme)
             try:
                 #print(word,"-->",rhyme)
-                seq = wp.generate_seq(model, tokenizer, rhyme, 7)
+
+                seq = wp.generate_seq(model, tokenizer, 208-1, rhyme, 6)
                 reversed_sentence = wp.reverse_sequence(seq)
+
                 return reversed_sentence
                 break
             except:
@@ -67,10 +65,8 @@ def create_rhyme_sentence(word):
                 else:
                     pass
 
-# Combines two sentences in order
-def combine_sentences(list1,list2):
+def combine_sentences(list1,list2): # Combines two sentences in order
     new_list = zip(list1,list2)
-
     return new_list
 
 def print_tuple(tupled_list):
@@ -81,7 +77,6 @@ def print_tuple(tupled_list):
         print(item2)
         formatted_list.append(item2)
         print('\n')
-
     return formatted_list
 
 def return_tuple_in_list(tupled_list):
@@ -89,20 +84,30 @@ def return_tuple_in_list(tupled_list):
     for item1,item2 in tupled_list:
         formatted_list.append(item1)
         formatted_list.append(item2)
-
     return formatted_list
 
 def formatted_list_output(formatted_list):
     master_list = []
     for line in formatted_list:
         master_list.append(line.split(" "))
-
     return master_list
 
-# Takes a summary and creates a Rhyme for the each line of the summary
-def rhyme_it(topic):
-    summary = wikipedia.page(topic).summary
-    print("Summary:",summary)
+
+def get_final_result(result):
+    finallist = [ ", ".join(item.split(" ")) for item in result ]
+
+    final_result = []
+    for sent in finallist:
+        final_result.append(sent[:-2])
+
+    return final_result
+
+def rhyme_it(topic): # Takes a summary and creates a Rhyme for the each line
+    try:
+        summary = wikipedia.page(topic).summary
+    except wikipedia.exceptions.DisambiguationError as e:
+        topic = random.choice(e.options)
+        summary = wikipedia.page(topic).summary
     lines = clean_page_content(summary)
     words_to_rhyme = get_last_word(lines)
     generated_sentences = []
@@ -111,9 +116,6 @@ def rhyme_it(topic):
         generated_sentences.append(rhyming_sentence)
     the_rap = combine_sentences(lines,generated_sentences) # Tuple
     the_rap = return_tuple_in_list(the_rap) # List of sentences
-
-    # List of sentences broken down into words
-    # Example Usage:
-    # the_rap = formatted_list_output(the_rap)
-
+    the_rap = get_final_result(the_rap)
     return the_rap
+    #print(formatted_list_output(the_rap)) # List of sentences broken down into words
