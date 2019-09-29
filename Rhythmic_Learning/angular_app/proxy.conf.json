@@ -5,7 +5,7 @@
         "pathRewrite": {"^/static" : ""}
     },
     "/api": {
-        "target": "http://192.168.0.5:5000/api/",
+        "target": "http://localhost:5000/api/",
         "secure": false,
         "pathRewrite": {"^/api" : ""}
     }
