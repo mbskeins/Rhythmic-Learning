@@ -1,8 +1,9 @@
 <mat-card class="fill">
      <div align="center">
-        <br>
-        <img src="/assets/logoIdea (1).png"/>
-        <br><br><br>
+        <br><br><br><br><br><br><br>
+        <img src="/assets/logoIdea (1).svg"/>
+        <h1 style="margin: 0px !important;" class="textSize">Rhythmic Learning</h1>
+        <br><br><br><br><br><br><br><br><br><br>
         <button (click)="scrollTo(1)" mat-raised-button color="primary">Learn More</button>
     </div>
 </mat-card>
@@ -18,7 +19,7 @@
        <br><br><br>       
    </div>
    <div align="right" style="padding-right: 30px;">
-        <button (click)="scrollTo(2)" mat-raised-button color="primary">Continue</button>
+        <button (click)="scrollTo(2)" style="margin-right: 40px;" mat-raised-button color="primary">Continue</button>
    </div>
 </mat-card>
 <br>
@@ -63,15 +64,14 @@
         <br>
          <br><br><br><br>
          <div align="right" style="padding-right: 30px;">
-                <button (click)="scrollTo(3)" mat-raised-button color="primary">Continue</button>
+                <button (click)="scrollTo(3)"  style="margin-right: 40px;" mat-raised-button color="primary">Continue</button>
         </div>
    </div>
 </mat-card>
 <br>
 <mat-card class="fill">
     <div align="center">
-     
-       <br><br><br><br><br><br><br><br>
+       <br><br><br><br>
        <h1>How'd We Do It?</h1>
        <br><br><br><br>
 
@@ -79,6 +79,9 @@
           <mat-tab label="Front End"> 
               <br><br>
               Angular
+              dsf
+              dsf
+              fff
           </mat-tab>
           <mat-tab label="Back End"> 
               <br><br>
@@ -89,18 +92,9 @@
               Some Shit I Dont Understand
           </mat-tab>
         </mat-tab-group>
-
-        <button (click)="scrollTo(3)" style="margin-top: auto" mat-raised-button color="primary">Continue</button>
-       
     </div>
-</mat-card>
-<br>
-<mat-card class="fill">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <div align="center">
-     
-       <br><br><br><br><br><br><br><br>
-       <h1>We'll Show You</h1>
-       <br><br><br><br>
-       <button mat-raised-button [routerLink]="['/rap']" color="primary">Let's Go</button>
-   </div>
+        <button [routerLink]="['/rap']" style="width:250px; height: 75px;" mat-raised-button color="primary">See Demo</button>
+    </div>
 </mat-card>
