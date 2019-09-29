@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   scrollTo(number: number){
     window.scrollTo({
-      top: (((window.outerHeight + window.innerHeight)/2) + 13) * number,
+      top: (((window.outerHeight + window.innerHeight)/2) + 8) * number,
       behavior: 'smooth',
     });
   }
