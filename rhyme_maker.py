@@ -7,15 +7,19 @@ import word_prediction as wp
 import pickle
 import random
 
-with open('models/new-newest-model.pkl', 'rb') as f:
+import importlib.util
+spec = importlib.util.spec_from_file_location("word_prediction", "./core/word_prediction.py")
+wp = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(wp)
+
+with open('models/model-v5.pkl', 'rb') as f:
     model = pickle.load(f)
 
-with open('models/new-newest-tokenizer.pkl', 'rb') as f:
+with open('models/tokenizer-v5.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
 
 adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"]
 
-summary = wikipedia.page('cold').summary
 last_word_list = [] # Array of last words of each sentence in order
 
 def clean_page_content(page_content):
@@ -50,7 +54,7 @@ def create_rhyme_sentence(word):
             try:
                 #print(word,"-->",rhyme)
 
-                seq = wp.generate_seq(model, tokenizer, 208-1, rhyme, 7)
+                seq = wp.generate_seq(model, tokenizer, 208-1, rhyme, 6)
                 reversed_sentence = wp.reverse_sequence(seq)
 
                 return reversed_sentence
@@ -88,8 +92,22 @@ def formatted_list_output(formatted_list):
         master_list.append(line.split(" "))
     return master_list
 
-def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
-    print("Summary:",summary)
+
+def get_final_result(result):
+    finallist = [ ", ".join(item.split(" ")) for item in result ]
+
+    final_result = []
+    for sent in finallist:
+        final_result.append(sent[:-2])
+
+    return final_result
+
+def rhyme_it(topic): # Takes a summary and creates a Rhyme for the each line
+    try:
+        summary = wikipedia.page(topic).summary
+    except wikipedia.exceptions.DisambiguationError as e:
+        topic = random.choice(e.options)
+        summary = wikipedia.page(topic).summary
     lines = clean_page_content(summary)
     words_to_rhyme = get_last_word(lines)
     generated_sentences = []
@@ -98,12 +116,6 @@ def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
         generated_sentences.append(rhyming_sentence)
     the_rap = combine_sentences(lines,generated_sentences) # Tuple
     the_rap = return_tuple_in_list(the_rap) # List of sentences
+    the_rap = get_final_result(the_rap)
     return the_rap
     #print(formatted_list_output(the_rap)) # List of sentences broken down into words
-
-result = rhyme_it(summary)
-
-for sent in result:
-    print()
-    print(sent)
-    print()

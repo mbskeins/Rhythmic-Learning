@@ -30,11 +30,4 @@ def sylabize_all_words(cleaned_sentences):
     return all_sentences
 
 
-#cleaned_sentences = clean_page_content(page_content)
-
-#hyphened_sentences = sylabize_all_words(cleaned_sentences)
-
-#print(find_rhymes('term', 1))
-
-# Find rhymes of a word
-#print(pronouncing.rhymes('bank'))
+#
