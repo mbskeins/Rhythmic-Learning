@@ -14,14 +14,16 @@ export class SyncRhythemService {
 constructor() { 
   console.log("SyncRhythem attached");
   this.music = new Howl({
-    src: ['static/sound.mp3']
-  })
+    src: ['static/trap.mp3']
+  });
 }
 
 public startTts(TtsInstances: TtsInstance[], uiText){
   var parsedData = this.buildSounds(TtsInstances);
   var secondTotal = 0;
-  parsedData.forEach(data => {
+  // parsedData.forEach(data => {
+    var data = parsedData[0]
+    this.playMusic();
     secondTotal += data.delay;
     var miliTotal = secondTotal * 1000;
     setTimeout(() => {
@@ -33,7 +35,7 @@ public startTts(TtsInstances: TtsInstance[], uiText){
         queue: false,
         listeners: {
           onstart: () => {
-              this.playMusic();
+              //this.playMusic();
           },
           onend: () => {
             //this.isPlaying = false;
@@ -48,14 +50,14 @@ public startTts(TtsInstances: TtsInstance[], uiText){
         }
       });
     }, miliTotal);
- });
+//  });
 }
 
 private playMusic(){
   if(!this.isPlaying) {
     setTimeout(() => {
       this.music.play();
-    }, 3);
+    }, 0);
   }
   this.isPlaying = true;
 }
@@ -67,9 +69,9 @@ private playMusic(){
       sound.init({
         'volume': 1,
         'lang': 'en-GB',
-        'rate': 1,
-        'pitch': 2,
-        'voice':'Google UK English Male',
+        'rate': 1.05,
+        'pitch': 1,
+        'voice':'Microsoft Zira Desktop - English (United States)',
         'splitSentences': true
       });
       results.push({
