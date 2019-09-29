@@ -51,15 +51,6 @@ def generate(text):
         return json.dumps(results, default=to_dict)
         '''
     return json.dumps(result, default=to_dict)
-    
-# @app.route('/upload', methods=['GET', 'POST'])
-# def upload():
-#     print("hit")
-#     if request.method == 'POST' and 'photo' in request.files:
-#         # filename = photos.save(request.files['photo'])
-#         # rec = Photo(filename=filename, user=g.user.id)
-#         # rec.store()
-#     return "oops", 404
 
 if __name__ == '__main__':
     app.run()

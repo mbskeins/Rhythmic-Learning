@@ -2,7 +2,7 @@
     <div *ngIf="test1 == false" align="center">
         <!-- <h1 align="center">WELCOME TO RHYTHMEC LEARNING</h1>
         <br><br><br><br><br><br><br>
-        <mat-spinner class="spinner"></mat-spinner>
+        <mat-spinner cla    ss="spinner"></mat-spinner>
         <br><br><br><br><br><br><br><br><br>
         <mat-form-field (keyup)="onKey($event)" class="center" appearance="outline">
             <mat-label>Outline form field</mat-label>
@@ -21,7 +21,7 @@
                 <input matInput>
             </mat-form-field>
             <br>
-            <button mat-raised-button (click)="test()" color="primary">Play</button>
+            <button mat-raised-button (click)="playBeatAndRapForTopic()" color="primary">Play</button>
             <br/>
             <br/>
             <button mat-raised-button (mousedown)="startRecording()" (mouseup)="stopRecording()" color="secondary">Hold To Record</button>
@@ -31,6 +31,15 @@
         <li *ngFor="let adLib of adLibs">
             <button mat-raised-button (click)="playAudio(adLib.number)">AdLib - {{adLib.number}}</button>
         </li>
+
+            <mat-form-field>
+                <mat-label>Favorite food</mat-label>
+                    <mat-select (selectionChange)="onSelectVoice($event)">
+                        <mat-option *ngFor="let voice of voices" [value]="voice.voiceURI">
+                            {{voice.name}}
+                        </mat-option>
+                    </mat-select>
+            </mat-form-field>
 
         <script type="text/javascript" src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>
     </div>

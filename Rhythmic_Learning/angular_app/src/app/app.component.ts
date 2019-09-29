@@ -19,7 +19,7 @@ import { AdLib } from './models/AdLib';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'RhythmicLearning';
-  apiObject$: Observable<TtsInstance[]>;
+  apiObject$: Observable<TtsInstance>;
   uiText = {
     str: ""
   };
@@ -30,7 +30,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private adLibs: AdLib[];
   private numberOfAdlibs: number;
-  
+  private voices: SpeechSynthesisVoice[];
+  private selectedVoiceURI: string;
+
   constructor(
     private syncService: SyncRhythemService,
     private http: HttpService,
@@ -38,38 +40,40 @@ export class AppComponent implements OnInit, AfterViewInit {
     ){
       this.adLibs = [];
       this.numberOfAdlibs = 0;
+
       this.audioRecordingService.getRecordedBlob().subscribe((data) => {
         var url = URL.createObjectURL(data.blob);
-        var adlibAudio = new Audio(url);
         ++this.numberOfAdlibs;
-        this.adLibs.push(new AdLib(adlibAudio, this.numberOfAdlibs));
+        this.adLibs.push(new AdLib(new Audio(url), this.numberOfAdlibs));
       });
     }
 
   ngOnInit(){
-
+    var synth = window.speechSynthesis;
+    setTimeout(() => {
+      this.voices = synth.getVoices();
+      this.selectedVoiceURI = this.voices[1].voiceURI;
+    }, 5);
   }
 
   ngAfterViewInit(){
 
   }
 
+  onSelectVoice(event: any){
+    this.selectedVoiceURI = event.value;
+    console.log(this.selectedVoiceURI);
+  }
+
   onKey(event: any) {
     this.topicText = event.target.value;
   }
 
-  test(){
-    // var ttsInstance = new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22);
-    // this.syncService.startTts(ttsInstance);
-
-    var dataString;
-    this.apiObject$.subscribe(data => dataString = data);
-    this.apiObject$.subscribe(data => {
-      console.log(dataString);
-      var dataStringTts;
-      dataStringTts = new TtsInstance(dataString, 22);
-      console.log(dataStringTts);
-      //this.syncService.startTts(dataStringTts, this.uiText);
+  playBeatAndRapForTopic(){
+    this.apiObject$ = this.http.getRapLyrics(this.topicText);
+    this.apiObject$.subscribe((data) => {
+      var dataStringTts = new TtsInstance(data.text, 22);
+      this.syncService.startTts(dataStringTts, this.selectedVoiceURI);
     });
   }
 

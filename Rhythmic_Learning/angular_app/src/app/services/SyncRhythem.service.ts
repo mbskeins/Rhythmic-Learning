@@ -21,32 +21,28 @@ constructor() {
   });
 }
 
-public startBeatAndLyrics(ttsInstance: TtsInstance){
-  const sound = new Speech();
-  sound.init({
-    'volume': 1,
-    'lang': 'en-GB',
-    'rate': 1.05,
-    'pitch': 1,
-    'voice':'Microsoft Zira Desktop - English (United States)',
-    'splitSentences': true
-  });
-  this.music.play();
-  this.isBeatPlaying = true;
-  setTimeout(() => {
-    // sound.speak({
-    //   text: ttsInstance.text,
-    //   queue: false,
-    //   listeners: {
-    //     onstart: () => {
-    //       //start ad libs
-    //     }
-    //   }
-    // });
-  }, ttsInstance.delay);
-}
-
-  public startTts(ttsInstance: TtsInstance){
-    this.startBeatAndLyrics(ttsInstance);
+  public startTts(ttsInstance: TtsInstance, voiceURI: string){
+    const sound = new Speech();
+    sound.init({
+      'volume': 1,
+      'lang': 'en-GB',
+      'rate': 1.05,
+      'pitch': 1,
+      'voice':voiceURI,
+      'splitSentences': true
+    });
+    this.music.play();
+    this.isBeatPlaying = true;
+    setTimeout(() => {
+      sound.speak({
+        text: ttsInstance.text,
+        queue: false,
+        listeners: {
+          onstart: () => {
+            //start ad libs
+          }
+        }
+      });
+    }, ttsInstance.delay);
   }
 }

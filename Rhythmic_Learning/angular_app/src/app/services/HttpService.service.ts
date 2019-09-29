@@ -12,8 +12,7 @@ export class HttpService {
     return this.http.get('https://api.github.com/users');
   }
 
-  getTestData(topic): Observable<TtsInstance[]>{
-    console.log(topic);
-    return this.http.get<TtsInstance[]>(`/api/generate/${topic}`)
+  getRapLyrics(topic): Observable<TtsInstance>{
+    return this.http.get<TtsInstance>(`/api/generate/${topic}`)
   }
 }
