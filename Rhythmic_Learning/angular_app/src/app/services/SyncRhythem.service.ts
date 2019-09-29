@@ -25,7 +25,7 @@ public startTts(TtsInstances: TtsInstance[], uiText){
     secondTotal += data.delay;
     var miliTotal = secondTotal * 1000;
     setTimeout(() => {
-      console.log(data);
+      console.log(data.text);
       uiText.str = data.text;
       console.log(uiText.str);
       data.sound.speak({

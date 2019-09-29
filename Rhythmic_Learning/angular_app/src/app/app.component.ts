@@ -18,10 +18,13 @@ import { bounce, fadeIn, fadeOut } from 'ng-animate';
 export class AppComponent implements OnInit, AfterViewInit{
   title = 'RhythmicLearning';
   apiObject$: Observable<TtsInstance[]>;
-  uiText = {str: ""};
+  uiText = {
+    str: ""
+  };
   getDataObj;
   test1 = false;
   fadeIn: any;
+  topicText = "";
   
   constructor(
     private syncService: SyncRhythemService,
@@ -42,15 +45,17 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   onKey(event: any) {
-    this.uiText = event.target.value;
+    this.topicText = event.target.value;
   }
 
   test(){
-    this.apiObject$ = this.http.getTestData(this.uiText);
+    console.log(this.uiText.str);
+    console.log(this.topicText);
 
+    this.apiObject$ = this.http.getTestData(this.topicText);
 
-    this.apiObject$.subscribe(data => {
-      this.syncService.startTts(data, this.uiText);
-    });
+    // this.apiObject$.subscribe(data => {
+    //   this.syncService.startTts(data, this.uiText);
+    // });
   }
 }
