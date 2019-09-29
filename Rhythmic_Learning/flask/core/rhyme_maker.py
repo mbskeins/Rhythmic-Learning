@@ -114,9 +114,9 @@ def rhyme_it(topic):
     return the_rap
 
 
-result = rhyme_it(summary)
+# result = rhyme_it(summary)
 
-for sent in result:
-    print()
-    print(sent)
-    print()
+# for sent in result:
+#     print()
+#     print(sent)
+#     print()
