@@ -49,6 +49,7 @@ def find_rhyme_word(word):
 def create_rhyme_sentence(word):
     # rhymables is the list of words that rhymes with the given word
     rhymables = find_rhyme_word(word)
+    print(rhymables)
     if len(rhymables) < 1:
         # random adlib if no rhymable words
         return grab_random_adlib() 
