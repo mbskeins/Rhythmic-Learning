@@ -29,8 +29,9 @@ def index():
 
 #@app.route("/api/generate/<wiki_term>", methods=['GET'])
 #def generate(wiki_term):
-@app.route("/api/generate/", methods=['GET'])
-def generate():
+@app.route("/api/generate/<text>", methods=['GET'])
+def generate(text):
+    print(text)
     factory = RhythemPatternFactory()
     delays = factory.test()
     sylabs = ['The s', 'heeps in the ', 'me', 'a', 'dow, the ', 'cows in the ', 'corn. re', 'fres', 'h e', 'dit ', 'de', 'le', 'te sour', 'ce rap', 'ge', 'ni', 'us T', 'ha', 't ', 'mil', 'ke', 'd the ', 'cow wit', 'h the ', 'crum', 'ple', 'd hor', 'n, Old ', 'Brind', 'le has ', 'go', 'ne to the neigh', 'bors ', 'Cold chic', 'ken a', 'plen', 'ty', ' ', 'for a ', 'me', 'al']
