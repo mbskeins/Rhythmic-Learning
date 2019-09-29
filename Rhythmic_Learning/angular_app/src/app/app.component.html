@@ -25,11 +25,12 @@
             <br/>
             <br/>
             <button mat-raised-button (mousedown)="startRecording()" (mouseup)="stopRecording()" color="secondary">Hold To Record</button>
-            <button mat-raised-button (click)="preview()" color="secondary">Preview</button>
             <br/>
-            <br/>
-            <button mat-raised-button (mousedown)="toggleAdlib()" (mouseup)="toggleAdlib()" color="secondary">Play ad lib</button>
         </div>
+
+        <li *ngFor="let adLib of adLibs">
+            <button mat-raised-button (click)="playAudio(adLib.number)">AdLib - {{adLib.number}}</button>
+        </li>
 
         <script type="text/javascript"
             src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>

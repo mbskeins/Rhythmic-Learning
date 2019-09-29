@@ -6,6 +6,7 @@ import { TtsInstance } from './models/TtsInstance'
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { bounce, fadeIn, fadeOut } from 'ng-animate';
 import {AudioRecordingService} from './services/audio-recording.service'
+import { AdLib } from './models/AdLib';
 
 @Component({
   selector: 'app-root',
@@ -27,21 +28,22 @@ export class AppComponent implements OnInit, AfterViewInit{
   fadeIn: any;
   topicText = "";
 
-  private adlibAudio: any;
-  private isAdLibButtonDown: boolean;
+  private adLibs: AdLib[];
+  private numberOfAdlibs: number;
   
   constructor(
     private syncService: SyncRhythemService,
     private http: HttpService,
     private audioRecordingService: AudioRecordingService
     ){
+      this.adLibs = [];
+      this.numberOfAdlibs = 0;
       this.audioRecordingService.getRecordedBlob().subscribe((data) => {
         var url = URL.createObjectURL(data.blob);
-        this.adlibAudio = new Audio(url);
+        var adlibAudio = new Audio(url);
+        ++this.numberOfAdlibs;
+        this.adLibs.push(new AdLib(adlibAudio, this.numberOfAdlibs));
       });
-      syncService.playAudio.subscribe({
-        next: () => this.playAudio()
-      })
     }
 
   ngOnInit(){
@@ -76,17 +78,12 @@ export class AppComponent implements OnInit, AfterViewInit{
     this.audioRecordingService.stopRecording();
   }
 
-  playAudio(){
-    if(this.isAdLibButtonDown){
-      this.adlibAudio.play();
-    }
+  playAudio(numberToPlay: number){
+    var index = numberToPlay - 1;
+    this.adLibs[index].audio.play();
   }
 
   preview(){
-    this.adlibAudio.play();
-  }
-
-  toggleAdlib(){
-    this.isAdLibButtonDown = !this.isAdLibButtonDown;
+    //this.adlibAudio.play();
   }
 }
