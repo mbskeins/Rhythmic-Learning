@@ -22,6 +22,13 @@
             </mat-form-field>
             <br>
             <button mat-raised-button (click)="test()" color="primary">Play</button>
+            <br/>
+            <br/>
+            <button mat-raised-button (mousedown)="startRecording()" (mouseup)="stopRecording()" color="secondary">Hold To Record</button>
+            <button mat-raised-button (click)="playAudio()" color="secondary">Preview</button>
+            <br/>
+            <br/>
+            <button mat-raised-button (mousedown)="toggleAdlib()" (mouseup)="toggleAdlib()" color="secondary">Play ad lib</button>
         </div>
 
         <script type="text/javascript"

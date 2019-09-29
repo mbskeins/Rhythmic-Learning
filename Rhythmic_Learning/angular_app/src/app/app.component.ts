@@ -5,12 +5,13 @@ import { HttpService } from './services/HttpService.service';
 import { TtsInstance } from './models/TtsInstance'
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { bounce, fadeIn, fadeOut } from 'ng-animate';
+import {AudioRecordingService} from './services/audio-recording.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [HttpService],
+  providers: [HttpService, AudioRecordingService],
   animations: [
     trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
   ],
@@ -25,11 +26,20 @@ export class AppComponent implements OnInit, AfterViewInit{
   test1 = false;
   fadeIn: any;
   topicText = "";
+
+  private adlibAudio: any;
+  private isAdLibButtonDown: boolean;
   
   constructor(
     private syncService: SyncRhythemService,
     private http: HttpService,
-    ){}
+    private audioRecordingService: AudioRecordingService
+    ){
+      this.audioRecordingService.getRecordedBlob().subscribe((data) => {
+        var url = URL.createObjectURL(data.blob);
+        this.adlibAudio = new Audio(url);
+      });
+    }
 
   ngOnInit(){
     //this.apiObject$ =this.http.getTestData();
@@ -49,15 +59,6 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   test(){
-<<<<<<< HEAD
-    console.log(this.uiText.str);
-    console.log(this.topicText);
-
-    this.apiObject$ = this.http.getTestData(this.topicText);
-
-    // this.apiObject$.subscribe(data => {
-    //   this.syncService.startTts(data, this.uiText);
-=======
     var list = [];
     list.push(new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22));
     this.syncService.startTts(list, this.uiText);
@@ -66,7 +67,27 @@ export class AppComponent implements OnInit, AfterViewInit{
     //   var list = [];
     //   list.push(new TtsInstance("Twinkle, twinkle, little star, How I wonder what you are. Up above the world so high, Like a diamond in the sky. When the blazing sun is gone, When he nothing shines upon, Then you show your little light, Twinkle, twinkle, all the night.", 22));
     //   this.syncService.startTts(list, this.uiText);
->>>>>>> e2fbc1fc2f82f05457798c233f6ed4eaf4710693
     // });
+  }
+
+  startRecording(){
+    console.log("started");
+    this.audioRecordingService.startRecording();
+  }
+
+  stopRecording(){
+    console.log("stopped");
+    this.audioRecordingService.stopRecording();
+  }
+
+  playAudio(){
+    if(this.isAdLibButtonDown){
+      this.adlibAudio.play();
+    }
+  }
+
+  toggleAdlib(){
+    this.isAdLibButtonDown = !this.isAdLibButtonDown;
+    console.log(this.isAdLibButtonDown);
   }
 }
