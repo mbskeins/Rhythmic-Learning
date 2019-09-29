@@ -13,7 +13,7 @@ with open('models/model.pkl', 'rb') as f:
 with open('models/tokenizer.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
 
-adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"]
+adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"] # set of adlibs you can add to
 
 summary = wikipedia.page('facebook').summary
 last_word_list = [] # Array of last words of each sentence in order
@@ -31,19 +31,23 @@ def clean_page_content(page_content):
 def grab_random_adlib():
     return random.choice(adlibs)
 
+# returns list of last words of each sentence
 def get_last_word(lines):
     for line in lines:
         words = line.split(" ")
         last_word_list.append(words[-1])
+
     return last_word_list
 
 def find_rhyme_word(word):
     return pronouncing.rhymes(word)
 
 def create_rhyme_sentence(word):
-    rhymables = find_rhyme_word(word) # rhymables is the list of words that rhymes with the given word
+    # rhymables is the list of words that rhymes with the given word
+    rhymables = find_rhyme_word(word)
     if len(rhymables) < 1:
-        return grab_random_adlib() # random adlib if no rhymable words
+        # random adlib if no rhymable words
+        return grab_random_adlib() 
     else:
         for rhyme in rhymables:
             try:
@@ -58,8 +62,10 @@ def create_rhyme_sentence(word):
                 else:
                     pass
 
-def combine_sentences(list1,list2): # Combines two sentences in order
+# Combines two sentences in order
+def combine_sentences(list1,list2):
     new_list = zip(list1,list2)
+
     return new_list
 
 def print_tuple(tupled_list):
@@ -70,6 +76,7 @@ def print_tuple(tupled_list):
         print(item2)
         formatted_list.append(item2)
         print('\n')
+
     return formatted_list
 
 def return_tuple_in_list(tupled_list):
@@ -77,15 +84,18 @@ def return_tuple_in_list(tupled_list):
     for item1,item2 in tupled_list:
         formatted_list.append(item1)
         formatted_list.append(item2)
+
     return formatted_list
 
 def formatted_list_output(formatted_list):
     master_list = []
     for line in formatted_list:
         master_list.append(line.split(" "))
+
     return master_list
 
-def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
+# Takes a summary and creates a Rhyme for the each line of the summary
+def rhyme_it(summary):
     print("Summary:",summary)
     lines = clean_page_content(summary)
     words_to_rhyme = get_last_word(lines)
@@ -95,8 +105,13 @@ def rhyme_it(summary): # Takes a summary and creates a Rhyme for the each line
         generated_sentences.append(rhyming_sentence)
     the_rap = combine_sentences(lines,generated_sentences) # Tuple
     the_rap = return_tuple_in_list(the_rap) # List of sentences
+
+    # List of sentences broken down into words
+    # Example Usage:
+    # the_rap = formatted_list_output(the_rap)
+
     return the_rap
-    #print(formatted_list_output(the_rap)) # List of sentences broken down into words
+
 
 result = rhyme_it(summary)
 
