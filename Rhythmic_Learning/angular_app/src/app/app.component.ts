@@ -5,12 +5,14 @@ import { HttpService } from './services/HttpService.service';
 import { TtsInstance } from './models/TtsInstance'
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { bounce, fadeIn, fadeOut } from 'ng-animate';
+import {AudioRecordingService} from './services/audio-recording.service'
+import { AdLib } from './models/AdLib';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [HttpService],
+  providers: [HttpService, AudioRecordingService],
   animations: [
     trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
   ],
@@ -26,34 +28,39 @@ export class AppComponent implements OnInit, AfterViewInit {
   fadeIn: any;
   topicText = "";
 
+  private adLibs: AdLib[];
+  private numberOfAdlibs: number;
+  
   constructor(
     private syncService: SyncRhythemService,
     private http: HttpService,
-  ) { }
+    private audioRecordingService: AudioRecordingService
+    ){
+      this.adLibs = [];
+      this.numberOfAdlibs = 0;
+      this.audioRecordingService.getRecordedBlob().subscribe((data) => {
+        var url = URL.createObjectURL(data.blob);
+        var adlibAudio = new Audio(url);
+        ++this.numberOfAdlibs;
+        this.adLibs.push(new AdLib(adlibAudio, this.numberOfAdlibs));
+      });
+    }
 
-  ngOnInit() {
-    //this.apiObject$ =this.http.getTestData();
+  ngOnInit(){
+
   }
 
-  ngAfterViewInit() {
-    // console.log(this.apiObject$.subscribe(data => {
-    //   //console.log(data);
-    //   this.getDataObj = data;
-    //   console.log("printing data object");
-    //   console.log(this.getDataObj);
-    // }))
+  ngAfterViewInit(){
+
   }
 
   onKey(event: any) {
     this.topicText = event.target.value;
   }
 
-  test() {
-    console.log(this.uiText.str);
-    console.log(this.topicText);
-
-    this.apiObject$ = this.http.getTestData(this.topicText);
-
+  test(){
+    // var ttsInstance = new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22);
+    // this.syncService.startTts(ttsInstance);
 
     var dataString;
     this.apiObject$.subscribe(data => dataString = data);
@@ -64,12 +71,18 @@ export class AppComponent implements OnInit, AfterViewInit {
       console.log(dataStringTts);
       //this.syncService.startTts(dataStringTts, this.uiText);
     });
+  }
 
+  startRecording(){
+    this.audioRecordingService.startRecording();
+  }
 
-    // this.apiObject$.subscribe(data => {
-    //   this.syncService.startTts(data, this.uiText);
+  stopRecording(){
+    this.audioRecordingService.stopRecording();
+  }
 
-    //this.syncService.startTts(dataString, this.uiText);
-
+  playAudio(numberToPlay: number){
+    var index = numberToPlay - 1;
+    this.adLibs[index].audio.play();
   }
 }

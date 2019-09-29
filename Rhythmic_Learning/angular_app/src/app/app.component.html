@@ -22,9 +22,16 @@
             </mat-form-field>
             <br>
             <button mat-raised-button (click)="test()" color="primary">Play</button>
+            <br/>
+            <br/>
+            <button mat-raised-button (mousedown)="startRecording()" (mouseup)="stopRecording()" color="secondary">Hold To Record</button>
+            <br/>
         </div>
 
-        <script type="text/javascript"
-            src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>
+        <li *ngFor="let adLib of adLibs">
+            <button mat-raised-button (click)="playAudio(adLib.number)">AdLib - {{adLib.number}}</button>
+        </li>
+
+        <script type="text/javascript" src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>
     </div>
 </mat-card>
