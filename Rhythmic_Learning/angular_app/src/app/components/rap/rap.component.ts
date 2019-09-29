@@ -15,7 +15,10 @@ import { AdLib } from '../../models/AdLib';
   styleUrls: ['./rap.component.scss'],
   providers: [HttpService, AudioRecordingService],
   animations: [
-    trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
+    trigger('fadeIn', [transition('* => *', useAnimation(fadeIn, {
+      // Set the duration to 5seconds and delay to 2seconds
+      params: { timing: 3, delay: 0 }
+    }))])
   ],
 })
 export class RapComponent implements OnInit, AfterViewInit {
