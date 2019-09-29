@@ -27,9 +27,6 @@ constructor() {
     this.sentences = sentences;
     this.currentSentenceIndex = 0;
 
-    this.music.play();
-    this.isBeatPlaying = true;
-    
     const sound = new Speech();
     sound.init({
       'volume': 1,
@@ -39,6 +36,9 @@ constructor() {
       'voice':voiceURI,
       'splitSentences': true
     });
+
+    this.music.play();
+    this.isBeatPlaying = true;
     this.playNextSentence(sound);
   }
 
@@ -50,7 +50,8 @@ constructor() {
     var quarterNote = 0.35;
     var quarterNoteMili = quarterNote * 1000;
     var measureTimeMili = quarterNoteMili * 4;
-
+    
+    setTimeout(() => {
       sound.speak({
         text: currentSentence,
         queue: false,
@@ -67,8 +68,9 @@ constructor() {
           }
         }
       });
-
-      ++this.currentSentenceIndex;
+    }, this.currentSentenceIndex == 0 ? 20*1000: 0);
+    
+    ++this.currentSentenceIndex;
   }
 
   public startTts(ttsInstance: TtsInstance, voiceURI: string){
