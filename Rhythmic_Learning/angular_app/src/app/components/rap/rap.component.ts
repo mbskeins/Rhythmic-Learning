@@ -31,9 +31,11 @@ export class RapComponent implements OnInit, AfterViewInit {
   test1 = false;
   fadeIn: any;
   topicText = "";
+  private voices: SpeechSynthesisVoice[];
 
   private adLibs: AdLib[];
   private numberOfAdlibs: number;
+  private selectedVoiceURI: string;
   
   constructor(
     private syncService: SyncRhythemService,
@@ -50,9 +52,13 @@ export class RapComponent implements OnInit, AfterViewInit {
       });
     }
 
-  ngOnInit(){
-
-  }
+    ngOnInit(){
+      var synth = window.speechSynthesis;
+      setTimeout(() => {
+        this.voices = synth.getVoices();
+      }, 5);
+      this.selectedVoiceURI = "Google UK English Male";
+    }
 
   ngAfterViewInit(){
 
@@ -88,5 +94,10 @@ export class RapComponent implements OnInit, AfterViewInit {
   playAudio(numberToPlay: number){
     var index = numberToPlay - 1;
     this.adLibs[index].audio.play();
+  }
+
+  onSelectVoice(event: any){
+    this.selectedVoiceURI = event.value;
+    console.log(this.selectedVoiceURI);
   }
 }
