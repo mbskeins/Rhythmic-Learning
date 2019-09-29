@@ -23,7 +23,7 @@ import { AdLib } from '../../models/AdLib';
 })
 export class RapComponent implements OnInit, AfterViewInit {
   title = 'RhythmicLearning';
-  apiObject$: Observable<TtsInstance[]>;
+  apiObject$: Observable<string[]>;
   uiText = {
     str: ""
   };
@@ -71,15 +71,16 @@ export class RapComponent implements OnInit, AfterViewInit {
   test(){
     // var ttsInstance = new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22);
     // this.syncService.startTts(ttsInstance);
-
+    console.log(this.selectedVoiceURI);
     var dataString;
+    this.apiObject$ = this.http.getRapLyrics(this.topicText);
     this.apiObject$.subscribe(data => dataString = data);
     this.apiObject$.subscribe(data => {
       console.log(dataString);
       var dataStringTts;
-      dataStringTts = new TtsInstance(dataString, 22);
+      dataStringTts = new TtsInstance(dataString, 0);
       console.log(dataStringTts);
-      //this.syncService.startTts(dataStringTts, this.uiText);
+      this.syncService.startTts(dataStringTts, this.topicText);
     });
   }
 
