@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit{
     ){}
 
   ngOnInit(){
-    this.apiObject$ =this.http.getTestData();
+    //this.apiObject$ =this.http.getTestData();
   }
 
   ngAfterViewInit(){
@@ -46,7 +46,9 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   test(){
-    this.http.postTopic(this.uiText);
+    this.apiObject$ = this.http.getTestData(this.uiText);
+
+
     this.apiObject$.subscribe(data => {
       this.syncService.startTts(data, this.uiText);
     });

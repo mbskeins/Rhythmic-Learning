@@ -8,15 +8,11 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
 
-  getData(): Observable<Object> {
+  getData(topic): Observable<Object> {
     return this.http.get('https://api.github.com/users');
   }
 
-  getTestData(): Observable<TtsInstance[]>{
-    return this.http.get<TtsInstance[]>('/api/generate')
-  }
-      
-  postTopic(topic){
-    console.log(topic);
+  getTestData(topic): Observable<TtsInstance[]>{
+    return this.http.get<TtsInstance[]>(`/api/generate/${topic}`)
   }
 }
