@@ -41,9 +41,9 @@ def find_rhyme_word(word):
     return pronouncing.rhymes(word)
 
 def create_rhyme_sentence(word):
-    rhymables = find_rhyme_word(word)
+    rhymables = find_rhyme_word(word) # rhymables is the list of words that rhymes with the given word
     if len(rhymables) < 1:
-        return grab_random_adlib()
+        return grab_random_adlib() # random adlib if no rhymable words
     else:
         for rhyme in rhymables:
             try:
