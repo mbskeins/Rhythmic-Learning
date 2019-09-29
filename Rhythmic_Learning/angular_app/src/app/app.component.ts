@@ -72,9 +72,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   playBeatAndRapForTopic(){
     this.apiObject$ = this.http.getRapLyrics(this.topicText);
     this.apiObject$.subscribe((data) => {
-      console.log(data.join());
-      var dataStringTts = new TtsInstance(data.join(), 0);
-      this.syncService.startTts(dataStringTts, this.selectedVoiceURI);
+      console.log(data);
+      this.syncService.startTtsWithSentences(data, this.selectedVoiceURI);
     });
   }
 

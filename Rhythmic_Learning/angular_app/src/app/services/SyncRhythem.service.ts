@@ -12,16 +12,17 @@ export class SyncRhythemService {
 
   private sentences: string[];
   currentSentenceIndex = 0;
-constructor() { 
-  console.log("SyncRhythem attached");
-  this.music = new Howl({
-    src: ['static/trap.mp3'],
-    volume: 0.5,
-    onend: () => {
-      this.isBeatPlaying = false;
-    }
-  });
-}
+
+  constructor() { 
+    console.log("SyncRhythem attached");
+    this.music = new Howl({
+      src: ['static/trap.mp3'],
+      volume: 0.5,
+      onend: () => {
+        this.isBeatPlaying = false;
+      }
+    });
+  }
 
   public startTtsWithSentences(sentences: string[], voiceURI: string){
     this.sentences = sentences;
@@ -46,10 +47,9 @@ constructor() {
     if(this.currentSentenceIndex >= this.sentences.length) return;
     var currentSentence = this.sentences[this.currentSentenceIndex];
 
+    var measureTimeMili = 0.35 * 1000 * 2;
     var startTimeInMili = new Date().getTime();
-    var quarterNote = 0.35;
-    var quarterNoteMili = quarterNote * 1000;
-    var measureTimeMili = quarterNoteMili * 4;
+    var latencyPadding = 3;
     
     setTimeout(() => {
       sound.speak({
@@ -64,11 +64,11 @@ constructor() {
             var delayInMili = percentageOfMeasureToPad * measureTimeMili;
             setTimeout(() => {
               this.playNextSentence(sound);
-            }, delayInMili);
+            }, delayInMili - latencyPadding);
           }
         }
       });
-    }, this.currentSentenceIndex == 0 ? 20*1000: 0);
+    }, this.currentSentenceIndex === 0 ? 22.1*1000 : 0);
     
     ++this.currentSentenceIndex;
   }
@@ -79,8 +79,8 @@ constructor() {
       'volume': 1,
       'lang': 'en-GB',
       'rate': 1.05,
-      'pitch': 1,
-      'voice':voiceURI,
+      'pitch': .9,
+      'voice': voiceURI,
       'splitSentences': true
     });
     var startTimeInMili = new Date().getTime();

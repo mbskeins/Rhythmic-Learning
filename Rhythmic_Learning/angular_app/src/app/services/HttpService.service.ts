@@ -13,6 +13,7 @@ export class HttpService {
   }
 
   getRapLyrics(topic): Observable<string[]>{
-    return this.http.get<string[]>(`/api/generate/${topic}`)
+    //return this.http.get<string[]>(`https://rhythmic-learning.herokuapp.com/api/generate/${topic}`)
+    return this.http.get<string[]>(`api/generate/${topic}`)
   }
 }
