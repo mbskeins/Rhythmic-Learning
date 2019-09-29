@@ -57,10 +57,10 @@ for i in range(9):
     big_summary += all_summaries
     print("Stage 2 [Finished]")
 
-    print("Round "+ i +" Complete.")
+    print("Round "+ str(i) +" Complete.")
     with open(f'corpuses/largest-corpus{i}.pkl', 'wb') as f:
         pickle.dump(cleaned_summaries, f)
-        print("Round "+ i +" Saved.")
+    print("Round "+ str(i) +" Saved.")
 cleaned_summaries = clean_text(big_summary)
 
 with open('corpuses/largest-corpus.pkl', 'wb') as f:
