@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
-import {SyncRhythemService} from 'src/app/services/SyncRhythem.service';
+import { SyncRhythemService } from 'src/app/services/SyncRhythem.service';
 import { Observable } from 'rxjs';
 import { HttpService } from './services/HttpService.service';
 import { TtsInstance } from './models/TtsInstance'
@@ -17,7 +17,7 @@ import { AdLib } from './models/AdLib';
     trigger('fadeIn', [transition('* => *', useAnimation(fadeIn))]),
   ],
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'RhythmicLearning';
   apiObject$: Observable<TtsInstance[]>;
   uiText = {
@@ -59,8 +59,18 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   test(){
-    var ttsInstance = new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22);
-    this.syncService.startTts(ttsInstance);
+    // var ttsInstance = new TtsInstance("Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo. Pull a nigga card like Uno. Flip a nigga shit like Judo. You niggas act too culo. You a nerd no Chad Hugo. Pockets too big they sumo. Pockets too big they sumo. Pockets too big they sumo.", 22);
+    // this.syncService.startTts(ttsInstance);
+
+    var dataString;
+    this.apiObject$.subscribe(data => dataString = data);
+    this.apiObject$.subscribe(data => {
+      console.log(dataString);
+      var dataStringTts;
+      dataStringTts = new TtsInstance(dataString, 22);
+      console.log(dataStringTts);
+      //this.syncService.startTts(dataStringTts, this.uiText);
+    });
   }
 
   startRecording(){
@@ -74,9 +84,5 @@ export class AppComponent implements OnInit, AfterViewInit{
   playAudio(numberToPlay: number){
     var index = numberToPlay - 1;
     this.adLibs[index].audio.play();
-  }
-
-  preview(){
-    //this.adlibAudio.play();
   }
 }

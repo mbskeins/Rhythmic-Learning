@@ -5,16 +5,13 @@ from models.Word import Word
 import math
 
 class RhythemPatternFactory():
-    data = [['money', 'is', 'any', 'item', 'or', 'verifiable', 'record', 'that', 'is', 'generally', 'accepted', 'as', 'payment', 'for', 'goods', 'and', 'services', 'and', 'repayment', 'of', 'debts', 'such', 'as', 'taxes', 'in', 'a', 'particular', 'country', 'or', 'socioeconomic', 'context']]
-    
+    data = "Twinkle, twinkle, little star. How I wonder what you are. Up above the world so high."
+
     def __init__(self):
         pass
     
     def generate(self):
-        ttsInstanceList = []
-        for sentence in self.data: 
-            ttsInstanceList += self.generateSentence(sentence)
-        return ttsInstanceList
+        return self.data
 
     def generateSentence(self, sentence):
         wordsInSentence = []
