@@ -7,15 +7,15 @@ import word_prediction as wp
 import pickle
 import random
 
-with open('models/model.pkl', 'rb') as f:
+with open('models/new-newest-model.pkl', 'rb') as f:
     model = pickle.load(f)
 
-with open('models/tokenizer.pkl', 'rb') as f:
+with open('models/new-newest-tokenizer.pkl', 'rb') as f:
     tokenizer = pickle.load(f)
 
 adlibs = ["Yeee DJ Rhytmic in da house","Learnin makes them earnins","Schoolin n Coolin"]
 
-summary = wikipedia.page('facebook').summary
+summary = wikipedia.page('cold').summary
 last_word_list = [] # Array of last words of each sentence in order
 
 def clean_page_content(page_content):
@@ -46,10 +46,13 @@ def create_rhyme_sentence(word):
         return grab_random_adlib()
     else:
         for rhyme in rhymables:
+            print(rhyme)
             try:
                 #print(word,"-->",rhyme)
-                seq = wp.generate_seq(model, tokenizer, rhyme, 7)
+
+                seq = wp.generate_seq(model, tokenizer, 208-1, rhyme, 7)
                 reversed_sentence = wp.reverse_sequence(seq)
+
                 return reversed_sentence
                 break
             except:
