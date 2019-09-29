@@ -2,19 +2,17 @@
   <div align="center">
 
     <br><br><br><br><br><br><br><br>
-    <p align="center" class="textStyle">{{uiText.str}}</p>
 
-    <br><br><br><br><br><br><br>
-    <br><br><br>
     <div [@fadeIn]="fadeIn">
+    <h1>Rhythmic Learning</h1>
+    <br><br>
+    
       <mat-form-field (keyup)="onKey($event)" class="main" appearance="outline">
-        <mat-label>Input Topic</mat-label>
+        <mat-label>Topic</mat-label>
         <input matInput>
       </mat-form-field>
       <br>
-      <button mat-raised-button (click)="test()" color="primary">Play</button>
-      <br />
-      <br />
+      <button mat-raised-button (click)="test()" color="primary">Play</button> &nbsp;&nbsp;&nbsp;
       <button mat-raised-button (mousedown)="startRecording()" (mouseup)="stopRecording()" color="secondary">Hold To
         Record</button>
       <br />
