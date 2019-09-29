@@ -64,8 +64,8 @@ private playMusic(){
       sound.init({
         'volume': 1,
         'lang': 'en-GB',
-        'rate': 1.2,
-        'pitch': 1,
+        'rate': 1,
+        'pitch': 2,
         'voice':'Google UK English Male',
         'splitSentences': true
       });

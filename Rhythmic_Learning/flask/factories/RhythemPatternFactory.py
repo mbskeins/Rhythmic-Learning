@@ -2,10 +2,10 @@ from enums.RhythemPatternEnums import RhythemPatternEnums
 from enums.NoteTimeEnums import NoteTimeEnums
 from models.TtsInstance import TtsInstance
 from models.Word import Word
-
+import math
 
 class RhythemPatternFactory():
-    data = [['mo-ney', 'is', 'any', 'item', 'or', 've-ri-fia-ble', 're-cord', 'that', 'is', 'ge-ner-al-ly', 'ac-cep-ted', 'as', 'pay-ment', 'for', 'goods', 'and', 'ser-vi-ces', 'and', 're-pay-ment', 'of', 'debts', 'such', 'as', 'taxes', 'in', 'a', 'par-ti-cu-lar', 'coun-try', 'or', 'so-ci-oeco-no-mic', 'con-text'], ['the', 'main', 'func-ti-ons', 'of', 'mo-ney', 'are', 'dis-tin-guis-hed', 'as', 'a', 'me-di-um', 'of', 'ex-chan-ge', 'a', 'unit', 'of', 'ac-count', 'a', 'sto-re', 'of', 'va-lue', 'and', 'so-me-ti-mes', 'a', 'standard', 'of', 'de-fer-red', 'pay-ment'], ['any', 'item', 'or', 've-ri-fia-ble', 're-cord', 'that', 'ful-fils', 'the-se', 'func-ti-ons', 'can', 'be', 'con-si-de-red', 'as', 'mo-ney'], ['mo-ney', 'is', 'his-to-ri-cally', 'an', 'emer-gent', 'mar-ket', 'phe-no-me-non', 'es-ta-blis-hing', 'a', 'com-mo-di-ty', 'mo-ney', 'but', 'ne-ar-ly', 'all', 'con-tem-po-ra-ry', 'mo-ney', 'sys-tems', 'are', 'ba-sed', 'on', 'fi-at', 'mo-ney']]
+    data = [['money', 'is', 'any', 'item', 'or', 'verifiable', 'record', 'that', 'is', 'generally', 'accepted', 'as', 'payment', 'for', 'goods', 'and', 'services', 'and', 'repayment', 'of', 'debts', 'such', 'as', 'taxes', 'in', 'a', 'particular', 'country', 'or', 'socioeconomic', 'context']]
     
     def __init__(self):
         pass
@@ -20,7 +20,27 @@ class RhythemPatternFactory():
         wordsInSentence = []
         for word in sentence:
             wordsInSentence.append(Word(word))
-        return wordsInSentence
+        return self.generateRhyme(wordsInSentence)
+
+    def generateRhyme(self, wordsInSentence):
+        ttsInstanceList = []
+        prevDelay = 0
+        prevSyllabCount = 0
+        totalDelay = 0
+        for i in range(len(wordsInSentence)):
+            word = wordsInSentence[i]
+            ttsInstanceList.append(TtsInstance(word.word, prevDelay))
+            prevSyllabCount = word.syllabCount
+            prevDelay = .5 if float(totalDelay).is_integer() else .75
+            totalDelay += prevDelay
+        if(totalDelay < self.round_up_to_even(totalDelay)):
+            restTime = self.round_up_to_even(totalDelay) - totalDelay
+            ttsInstanceList.append(TtsInstance("", restTime))
+        return ttsInstanceList
+
+    def round_up_to_even(self, num):
+        return math.ceil(num / 2.) * 2
+
 
 '''
             results.append(.5)
