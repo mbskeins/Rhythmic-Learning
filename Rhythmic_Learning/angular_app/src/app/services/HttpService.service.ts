@@ -13,6 +13,7 @@ export class HttpService {
   }
 
   getTestData(topic): Observable<TtsInstance[]>{
+    console.log(topic);
     return this.http.get<TtsInstance[]>(`/api/generate/${topic}`)
   }
 }
