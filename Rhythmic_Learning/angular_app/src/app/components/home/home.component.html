@@ -1,16 +1,14 @@
 <mat-card class="fill">
      <div align="center">
-      
-        <br><br><br><br><br><br><br><br><br><br><br><br>
-        <p class="textStyle"> Why Rhythmic Learning? </p>
-        <br><br><br><br><br>
-    
+        <br>
+        <img src="/assets/logoIdea (1).png"/>
+        <br><br><br>
+        <button (click)="scrollTo(1)" mat-raised-button color="primary">Learn More</button>
     </div>
 </mat-card>
 <br>
 <mat-card class="fill">
     <div align="center">
-     
        <br><br><br><br><br><br>
        <p class="titleSize">Problem Statement:</p>
        <br><br>
@@ -20,7 +18,10 @@
        <p class="paragraphSize">We take a Wikipedia page, generate a rap using AI, generate a beat, and play it back for the user  </p>
        
        <br><br><br><br><br><br><br>
-       <br><br><br>
+       <br><br><br>       
+   </div>
+   <div align="right" style="padding-right: 30px;">
+        <button (click)="scrollTo(2)" mat-raised-button color="primary">Continue</button>
    </div>
 </mat-card>
 <br>
@@ -28,7 +29,7 @@
 <mat-card class="fill">
     <div align="center">
        <h1>Impact:</h1>
-       <br><br><br><br><br><br>
+       <br><br><br>
        <mat-grid-list cols="3" rowHeight="50px">
             <mat-grid-tile>
                 <p align="center">Better Grades</p>
@@ -43,19 +44,19 @@
          <br/>
        <mat-grid-list cols="3" rowHeight="320px">
           <mat-grid-tile>
-              <div >
+              <div style="padding: 20px">
                     <mat-icon style="width: 100%;" aria-hidden="false" aria-label="Example thumbs up SVG icon">show_chart</mat-icon>
                     <p class="paragraphSize">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula id justo vitae sagittis. </p>
               </div>
           </mat-grid-tile>
           <mat-grid-tile>
-              <div>
+              <div style="padding: 20px">
                     <mat-icon style="width: 100%;" aria-hidden="false" aria-label="Example thumbs up SVG icon">emoji_people</mat-icon>
                     <p class="paragraphSize">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula id justo vitae sagittis. </p>
               </div>
           </mat-grid-tile>
           <mat-grid-tile>
-              <div>
+              <div style="padding: 20px"> 
                     <mat-icon style="width: 100%;" aria-hidden="false" aria-label="Example thumbs up SVG icon">check_box</mat-icon>
                     <p class="paragraphSize">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula id justo vitae sagittis. </p>
               </div>
@@ -64,6 +65,9 @@
         <br>
         <br>
          <br><br><br><br>
+         <div align="right" style="padding-right: 30px;">
+                <button (click)="scrollTo(3)" mat-raised-button color="primary">Continue</button>
+        </div>
    </div>
 </mat-card>
 <br>
@@ -88,7 +92,10 @@
               Some Shit I Dont Understand
           </mat-tab>
         </mat-tab-group>
-   </div>
+
+        <button (click)="scrollTo(3)" style="margin-top: auto" mat-raised-button color="primary">Continue</button>
+       
+    </div>
 </mat-card>
 <br>
 <mat-card class="fill">
