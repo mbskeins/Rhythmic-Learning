@@ -100,7 +100,11 @@ def formatted_list_output(formatted_list):
 
 # Takes a summary and creates a Rhyme for the each line of the summary
 def rhyme_it(topic):
-    summary = wikipedia.page(topic).summary
+    try:
+        summary = wikipedia.page(topic).summary
+    except wikipedia.exceptions.DisambiguationError as e:
+        topic = random.choice(e.options)
+        summary = wikipedia.page(topic).summary
     print("Summary:",summary)
     lines = clean_page_content(summary)
     words_to_rhyme = get_last_word(lines)

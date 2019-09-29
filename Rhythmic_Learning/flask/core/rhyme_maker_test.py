@@ -7,5 +7,5 @@ def clean_print(lines):
         print(str(i)+ ": " + str(line))
         i += 1
 
-rap = rhyme_maker_local.rhyme_it("Facebook")
+rap = rhyme_maker_local.rhyme_it("Amazon")
 clean_print(rap)
