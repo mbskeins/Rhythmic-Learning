@@ -16,6 +16,11 @@ from factories.RhythemPatternFactory import RhythemPatternFactory
 from models.TtsInstance import TtsInstance
 from helpers.serializationHelper import *
 
+import importlib.util
+spec = importlib.util.spec_from_file_location("module.name", "./core/rhyme_maker.py")
+ai = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(ai)
+
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -32,8 +37,9 @@ def index():
 @app.route("/api/generate/<text>", methods=['GET'])
 def generate(text):
     print(text)
-    factory = RhythemPatternFactory()
-    result = factory.generate()
+    result = ai.rhyme_it(text)
+    #factory = RhythemPatternFactory()
+    #result = factory.generate()
     # factory generate pass list of lists. return object created
     # 
     '''
@@ -46,14 +52,14 @@ def generate(text):
         '''
     return json.dumps(result, default=to_dict)
     
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    print("hit")
-    if request.method == 'POST' and 'photo' in request.files:
-        filename = photos.save(request.files['photo'])
-        rec = Photo(filename=filename, user=g.user.id)
-        rec.store()
-    return "oops", 404
+# @app.route('/upload', methods=['GET', 'POST'])
+# def upload():
+#     print("hit")
+#     if request.method == 'POST' and 'photo' in request.files:
+#         # filename = photos.save(request.files['photo'])
+#         # rec = Photo(filename=filename, user=g.user.id)
+#         # rec.store()
+#     return "oops", 404
 
 if __name__ == '__main__':
     app.run()
