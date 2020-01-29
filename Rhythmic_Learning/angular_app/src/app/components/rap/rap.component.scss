@@ -1,0 +1,44 @@
+.fill{
+    height: 100vh;
+}
+.spinner{
+    left: 45%;
+}
+.center{
+    top: 50%;
+    left: 42%;
+    margin: auto;
+}
+.center2{
+    top: 50%;
+    left: 42%;
+    margin-left: 60px;
+}
+.textStyle{
+    font-size: 60px;
+}
+
+.fade-out.ng-hide {
+    opacity: 0;
+  }
+  
+  .fade-out.ng-hide-add, .fade-out.ng-hide-remove {
+    transition: all linear 0.5s;
+  }
+  
+  .check-element {
+    border: 1px solid black;
+    opacity: 1;
+    padding: 10px;
+  }
+  .main{
+    //height: 30vh;
+    //display: flex;
+    justify-content: center;
+  }
+  mat-form-field {
+    width: 40%;
+    }
+.buttonSpace{
+    padding-left: 10px;
+}

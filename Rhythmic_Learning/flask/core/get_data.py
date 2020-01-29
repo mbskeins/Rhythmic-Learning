@@ -10,7 +10,7 @@ import re
 import pickle
 
 def grab_summaries():
-    rand = wikipedia.random(pages=250)
+    rand = wikipedia.random(pages=50)
     summary_text_joined = ''
     for page in rand:
         try:
@@ -30,7 +30,7 @@ def grab_summaries():
 
 def clean_text(all_summaries):
     cleaned_summaries = ''
-
+    words = set(nltk.corpus.words.words())
     all_summaries = nltk.sent_tokenize(all_summaries)
 
 
@@ -44,8 +44,9 @@ def clean_text(all_summaries):
 
         sent = ''.join([i for i in sent if not i.isdigit()])
 
+        sent = ' '.join(w for w in nltk.wordpunct_tokenize(sent) if w.lower() in words or not w.isalpha())
 
-        sent += ' \n '
+        sent += ' + '
 
         cleaned_summaries += sent
 
@@ -55,7 +56,7 @@ def clean_text(all_summaries):
 
 big_summary = ''
 
-for i in range(1):
+for i in range(10):
     print('starting grab')
     all_summaries = grab_summaries()
 
@@ -68,5 +69,5 @@ print('finished!')
 
 
 
-with open('corpuses/split_lines_corp.pkl', 'wb') as f:
+with open('corpuses/split_lines_corp1.pkl', 'wb') as f:
     pickle.dump(cleaned_summaries, f)

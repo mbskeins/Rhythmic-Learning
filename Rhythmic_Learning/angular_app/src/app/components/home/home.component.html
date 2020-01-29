@@ -1,0 +1,111 @@
+<mat-card class="fill">
+     <div align="center">
+        <br><br><br><br><br><br><br>
+        <img src="/assets/logoIdea (1).svg"/>
+        <h1 style="margin: 0px !important;" class="textSize">Rhythmic Learning</h1>
+        <p style="margin: 0px !important; font-size: small;">Jacob Lebowitz, Jared Fellows, Ohm Shah, and Matt Skeins</p>
+        <br><br><br><br><br><br><br><br><br><br>
+        <button (click)="scrollTo(1)" mat-raised-button color="primary">Learn More</button>
+    </div>
+</mat-card>
+<br>
+<mat-card class="fill">
+    <div align="center">
+       <br><br><br><br><br><br>
+       <p class="titleSize">Problem Statement:</p>
+       <br><br>
+       <p class="paragraphSize">Learning at a young age can sometimes seem daunting, and down right frustrating when intrest isn't there</p>
+       <p class="paragraphSize">What we wanted to do with this project was to bridge the gap from education, to young kids </p>
+       <p class="paragraphSize">With a lot of research, we decided to leverage one of the biggest resources for information in the world, Wikipedia </p>
+       <p class="paragraphSize">We take a Wikipedia page, generate a rap using AI, generate a beat, and play it back for the user  </p>
+       
+       <br><br><br><br><br>
+   </div>
+   <div align="right" style="padding-right: 30px;">
+        <button (click)="scrollTo(2)" style="margin-right: 40px;" mat-raised-button color="primary">Continue</button>
+   </div>
+</mat-card>
+<br>
+
+<mat-card class="fill">
+    <div align="center">
+       <h1>Impact:</h1>
+       <p>A 2009 Study Conducted By: Physiology Educational Research Consortium, Seattle, WA </p>
+       <p> "a study on medical students showed music provided emotional support during stressful periods during the quarter, </p>
+       <p>helped promote a feeling of safety within the environment, and re-energized the class during long class sessions" </p>   
+       <br><br><br>
+       <mat-grid-list cols="3" rowHeight="50px">
+            <mat-grid-tile>
+                <p align="center">Better Grades</p>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p align="center">More Engagment</p>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <p align="center">Backed By Science</p>
+            </mat-grid-tile>
+          </mat-grid-list>
+         <br/>
+       <mat-grid-list cols="3" rowHeight="320px">
+          <mat-grid-tile>
+              <div style="padding: 20px">
+                    <mat-icon style="width: 100%;" aria-hidden="false" aria-label="Example thumbs up SVG icon">show_chart</mat-icon>
+                </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <div style="padding: 20px">
+                    <mat-icon style="width: 100%;" aria-hidden="false" aria-label="Example thumbs up SVG icon">emoji_people</mat-icon>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+              <div style="padding: 20px"> 
+                    <mat-icon style="width: 100%;" aria-hidden="false" aria-label="Example thumbs up SVG icon">check_box</mat-icon>
+             </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+         <div align="right" style="padding-right: 30px;">
+                <button (click)="scrollTo(3)"  style="margin-right: 40px;" mat-raised-button color="primary">Continue</button>
+        </div>
+   </div>
+</mat-card>
+<br>
+<mat-card class="fill">
+    <div align="center">
+       <br><br><br><br>
+       <h1>How'd We Do It?</h1>
+       <br><br><br><br>
+
+       <mat-tab-group mat-stretch-tabs>
+          <mat-tab label="Front End"> 
+              <br><br>
+              <p>AngularJS</p>
+              <p>Services</p>
+              <p>Audio Recording</p>
+              <p>Make Requests to API Layer</p>
+              <p>Rhythm Generation</p>
+          </mat-tab>
+          <mat-tab label="Back End"> 
+              <br><br>
+              <p>Python</p>
+              <p>Flask</p>
+              <p>Endpoints</p>
+              <p>Send Data To AI</p>
+          </mat-tab>
+          <mat-tab label="AI"> 
+              <br><br>
+              <p> TensorFlow </p>
+              <p> Web Scraping </p>
+              <p> Cleaned Data </p>
+              <p> Deep Learning Model </p>
+              <p> Natural Language Processing </p>
+          </mat-tab>
+        </mat-tab-group>
+    </div>
+    <br><br><br><br><br><br>
+   
+</mat-card>
+<mat-card class="fill">
+    <div align="center">
+        <button [routerLink]="['/rap']" style="width:250px; height: 75px;" mat-raised-button color="primary">See Demo</button>
+    </div>
+</mat-card>

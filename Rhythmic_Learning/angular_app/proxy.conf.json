@@ -1,12 +1,14 @@
 {
-    "/static": {
+    "/static/*": {
         "target": "http://localhost:5000/static/",
         "secure": false,
-        "pathRewrite": {"^/static" : ""}
+        "pathRewrite": {"^/static" : ""},
+        "changeOrigin": true
     },
-    "/api": {
+    "/api/*": {
         "target": "http://localhost:5000/api/",
         "secure": false,
-        "pathRewrite": {"^/api" : ""}
+        "pathRewrite": {"^/api" : ""},
+        "changeOrigin": true
     }
 }

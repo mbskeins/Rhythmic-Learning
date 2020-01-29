@@ -12,8 +12,8 @@ export class HttpService {
     return this.http.get('https://api.github.com/users');
   }
 
-  getTestData(topic): Observable<TtsInstance[]>{
-    console.log(topic);
-    return this.http.get<TtsInstance[]>(`/api/generate/${topic}`)
+  getRapLyrics(topic): Observable<string[]>{
+    //return this.http.get<string[]>(`https://rhythmic-learning.herokuapp.com/api/generate/${topic}`)
+    return this.http.get<string[]>(`api/generate/${topic}`)
   }
 }

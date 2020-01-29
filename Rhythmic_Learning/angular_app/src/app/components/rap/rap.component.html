@@ -1,0 +1,35 @@
+<mat-card class="fill">
+  <div align="center">
+
+    <br><br><br><br><br><br><br><br>
+
+    <div [@fadeIn]="fadeIn">
+      <br><br><br>
+    <h1 style="margin-bottom: 23px;">Rhythmic Learning</h1>    
+      <mat-form-field (keyup)="onKey($event)" class="main" appearance="outline">
+        <mat-label>Topic</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button (click)="test()" color="primary">Play</button> &nbsp;&nbsp;&nbsp;
+      <button mat-raised-button (mousedown)="startRecording()" (mouseup)="stopRecording()" color="secondary">Hold To
+        Record</button>
+        &nbsp;&nbsp;&nbsp;
+        <mat-form-field style="width: 20%;" appearance="outline">
+            <mat-label>Voice List</mat-label>
+                <mat-select (selectionChange)="onSelectVoice($event)">
+                    <mat-option *ngFor="let voice of voices" [value]="voice.voiceURI">
+                        {{voice.name}}
+                    </mat-option>
+                </mat-select>
+        </mat-form-field>
+      <br />
+    </div>
+
+    <li *ngFor="let adLib of adLibs">
+      <button mat-raised-button (click)="playAudio(adLib.number)">AdLib - {{adLib.number}}</button>
+    </li>
+
+    <script type="text/javascript" src="https://raw.github.com/hiddentao/google-tts/master/google-tts.min.js"></script>
+  </div>
+</mat-card>

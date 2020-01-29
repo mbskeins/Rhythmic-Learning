@@ -6,18 +6,6 @@ import string
 import pyphen
 import pronouncing
 
-def grab_summaries():
-    rand = wikipedia.random(pages=10)
-    summary_text_joined = ''
-    for page in rand:
-        try:
-            p = wikipedia.page(page)
-            summary_text_joined += str(p.summary)
-        except wikipedia.DisambiguationError as e:
-            pass
-
-    return summary_text_joined
-
 def clean_page_content(page_content):
     # List containing the first 15 sentences of the page (page summary)
     sentences = sent_tokenize(page_content)[:15]
@@ -41,24 +29,5 @@ def sylabize_all_words(cleaned_sentences):
 
     return all_sentences
 
-def find_rhymes(word, level):
-     entries = nltk.corpus.cmudict.entries()
-     syllables = [(word, syl) for word, syl in entries if word == word]
-     rhymes = []
-     for (word, syllable) in syllables:
-             rhymes += [word for word, pron in entries if pron[-level:] == syllable[-level:]]
-     return set(rhymes)
 
-
-#cleaned_sentences = clean_page_content(page_content)
-
-#hyphened_sentences = sylabize_all_words(cleaned_sentences)
-
-#print(find_rhymes('term', 1))
-
-# Find rhymes of a word
-#print(pronouncing.rhymes('bank'))
-
-all_summaries = grab_summaries()
-
-print(clean_page_content(all_summaries))
+#
