@@ -64,7 +64,7 @@ python-cli-ui==0.7.4
 python-dateutil==2.7.5
 python-dotenv==0.10.3
 python-editor==1.0.4
-PyYAML==5.1.2
+PyYAML==5.4
 pyzmq==17.1.2
 query-string==2018.11.20
 redis==3.3.8
