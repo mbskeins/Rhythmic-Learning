@@ -57,7 +57,7 @@ psycopg2-binary==2.8.3
 ptyprocess==0.6.0
 public==2018.11.20
 PyChromecast==3.1.0
-Pygments==2.3.0
+Pygments==2.7.4
 PyInquirer==1.0.3
 Pyphen==0.9.5
 python-cli-ui==0.7.4
