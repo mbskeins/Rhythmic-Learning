@@ -23,7 +23,7 @@
     "@angular/router": "~8.2.5",
     "angular-animate": "^1.7.8",
     "howler": "^2.1.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-animate": "^0.3.4",
     "recordrtc": "^5.5.8",
     "rxjs": "~6.4.0",
